@@ -1,0 +1,19 @@
+[
+	{ "keys": ["f5"], "command": "toggle_side_bar" },
+	{ "keys": ["ctrl+1"], "command": "insert_snippet", "args": {"name": "Packages/User/html.sublime-snippet"} },
+	{ "keys": ["ctrl+2"], "command": "insert_snippet", "args": {"name": "Packages/User/css.sublime-snippet"} },
+	{ "keys": ["ctrl+3"], "command": "insert_snippet", "args": {"name": "Packages/User/console.sublime-snippet"} },
+	{ "keys": ["ctrl+4"], "command": "insert_snippet", "args": {"name": "Packages/User/smarty.sublime-snippet"} },
+	{ "keys": ["ctrl+5"], "command": "insert_snippet", "args": {"name": "Packages/User/svncim.sublime-snippet"} },
+	{ "keys": ["ctrl+alt+t"], "command": "html_tidy"},
+	{ "keys": ["/","/"], "command": "toggle_comment", "args": { "block": false } },
+	{ "keys": ["ctrl+/"], "command": "toggle_comment", "args": { "block": true } },
+	{ "keys": ["ctrl+alt+m"], "command": "join_lines" },
+	{ "keys": ["ctrl+alt+d"], "command": "alignment" },
+	{ "keys": ["ctrl+alt+]"], "command": "compact_expand_css", "args": { "action": "expand" }  },
+	{ "keys": ["ctrl+alt+["], "command": "compact_expand_css", "args": { "action": "compact" } },
+	{ "keys": ["alt+pagedown"], "command": "svn_wc_commit" },
+	{ "keys": ["alt+pageup"], "command": "svn_wc_update" },
+	{ "keys": ["f12"], "command": "open_in_browser" }
+	// Ctrl + shift + z开启输入窗格
+]

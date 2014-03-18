@@ -1,0 +1,35 @@
+{
+	"auto_upgrade_last_run": null,
+	"installed_packages":
+	[
+		"Alignment",
+		"Better CoffeeScript",
+		"BracketHighlighter",
+		"Can I Use",
+		"Compass",
+		"DocBlockr",
+		"EJS",
+		"Emmet",
+		"GitGutter",
+		"InputHelper",
+		"jQuery",
+		"JsFormat",
+		"JSHint",
+		"KeymapManager",
+		"Markdown Preview",
+		"MarkdownEditing",
+		"Package Control",
+		"Pretty JSON",
+		"Sass",
+		"SideBarEnhancements",
+		"Smarty",
+		"Stylus",
+		"SublimeLinter",
+		"SVN",
+		"Syntax Highlighting for Sass",
+		"Terminal",
+		"TrailingSpaces",
+		"Underscorejs snippets",
+		"Web Inspector"
+	]
+}

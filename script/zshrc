@@ -131,7 +131,7 @@ alias cls='clear'
 alias ps='ps -ef'
 
 # Sublime Text
-alias st='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
+alias st='subl'
 
 # Disk usage
 alias du='du -khs'
@@ -142,41 +142,11 @@ alias ys-d='cd ~/Desktop'
 # Open with Sublime Text 2.
 alias ys-b='st ~/.bash_profile'
 
-# tar -jxvf data.tar.bz2 -C /tmp/extract_here/
-alias ys-tuz='tar -jxvf'
-# tar -zxvf data.tar.gz -C /tmp/extract_here/
-alias ys-tug='tar -zxvf'
-
 # Generate a random password
 alias ys-password='openssl rand -base64 32'
 
 # Clean DS_Store files
 alias ys-clean-ds="find . -name '.DS_Store' -exec rm {} \;"
-
-if [[ "$OSTYPE" == "darwin"* ]]; then
-
-	# Mac system info
-	alias ys-sys-info='system_profiler SPHardwareDataType SPSerialATADataType SPDisplaysDataType'
-
-	# Fix the duplicate or old items on "Open with..." list in osx
-	alias ys-fix-open-with='/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -r -domain local-domain system -domain user && killall Finder'
-
-	# Disable the Dashboard.
-	alias ys-disable-dashboard="defaults write com.apple.dashboard mcx-disabled -boolean YES; killall Dock"
-
-	# Disable Apple Key Press Hold.
-	alias ys-disable-keyhold="defaults write -g ApplePressAndHoldEnabled -bool false"
-
-	# Reset finder settings.
-	alias ys-reset-finder="Remove Finder preferences: rm ~/Library/Preferences/com.apple.finder.plist; killall Finder"
-
-	# Change the sound of QQ receiving message.
-	alias ys-qq-sound="sudo cp -f '/Applications/Messages.app/Contents/Resources/Received Message.aiff' /Applications/QQ.app/Contents/Resources/msg.aif"
-
-	# Clear DNS cache.
-	alias ys-dns-fc="dscacheutil -flushcache"
-fi
-
 
 ########################################## Personal Profile ##########################################
 

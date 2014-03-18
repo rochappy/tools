@@ -1,0 +1,56 @@
+" Vundle Settings
+set nocompatible               " be iMproved
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
+
+" My Bundles:
+Bundle 'Lokaltog/vim-powerline'
+
+" supertab
+Bundle 'ervandew/supertab'
+
+" vim-commentary
+" Bundle 'tpope/vim-commentary'
+
+" emmet-vim
+" Bundle 'mattn/emmet-vim'
+
+" neocomplcache
+Bundle 'Shougo/neocomplcache'
+
+filetype plugin indent on     " required!
+"
+" Brief help
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install(update) bundles
+" :BundleSearch(!) foo - search(or refresh cache first) for foo
+" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
+
+" Set Powserline
+set nocompatible   " Disable vi-compatibility
+set laststatus=2   " Always show the statusline
+set encoding=utf-8 " Necessary to show Unicode glyphs
+" let g:Powerline_symbols = 'fancy'
+
+" neocomplcache auto completion
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_auto_select = 1
+
+" Set line number
+set nu
+set rnu
+
+" Auto indent
+set autoindent
+
+" Set syntax highlighting
+syntax on

@@ -1,9 +1,10 @@
+#!/bin/bash
+
 # quote https://github.com/ysmood/Kit
 # update: rochappy
-
 user=$1
 
-if [[ ! $1 ]]; then
+if [ ! $1 ]; then
         echo "You must specify a user name."
         exit
 fi
@@ -28,6 +29,8 @@ vim +BundleInstall +qall
 rm -rf $user_dir/.nvm
 git clone https://github.com/creationix/nvm.git $user_dir/.nvm
 source $user_dir/.nvm/nvm.sh
+
+#nvm install 0.10
 nvm install 0.10
 nvm alias default v0.10
 
@@ -48,3 +51,4 @@ chown -Rf $user:$user $user_dir
 
 chsh -s /bin/zsh $user
 chsh -s /bin/zsh root
+source $user_dir/.zshrc

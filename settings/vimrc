@@ -25,10 +25,10 @@ Bundle 'ervandew/supertab'
 Bundle 'Shougo/neocomplcache'
 
 " Multiple
-Bundle 'terryma/vim-multiple-cursors'
+Bundle 'terryma/vim-multiple-cursors.vim'
 
 " Ctrlp
-Bundle 'kien/ctrlp'
+Bundle 'kien/ctrlp.vim'
 
 
 filetype plugin indent on     " required!
@@ -54,7 +54,7 @@ let g:neocomplcache_enable_auto_select = 1
 
 " Set line number
 set nu
-#set rnu
+" set rnu
 
 " Auto indent
 set autoindent

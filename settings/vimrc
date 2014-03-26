@@ -22,7 +22,7 @@ Bundle 'ervandew/supertab'
 " Bundle 'mattn/emmet-vim'
 
 " neocomplcache
-Bundle 'Shougo/neocomplcache'
+Bundle 'Shougo/neocomplcache.vim'
 
 " Multiple
 Bundle 'terryma/vim-multiple-cursors.vim'

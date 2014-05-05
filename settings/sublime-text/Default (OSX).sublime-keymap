@@ -1,0 +1,10 @@
+[
+	// Can I Use
+	{ "keys": ["ctrl+alt+f"], "command": "use_it" },
+    { "keys": ["super+3"], "command": "insert_snippet", "args": { "name": "Packages/User/console.sublime-snippet" } },
+    { "keys": ["super+4"], "command": "insert_snippet", "args": { "name": "Packages/User/smarty.sublime-snippet" } },
+    { "keys": ["super+5"], "command": "toggle_side_bar" },
+    { "keys": ["/", "/"], "command": "toggle_comment", "args": { "block": false } },
+    { "keys": ["super+/"], "command": "toggle_comment", "args": { "block": true } },
+
+]

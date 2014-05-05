@@ -1,0 +1,12 @@
+{
+	"font_face": "Yahei_Monaco",
+    "color_scheme": "Packages/User/Flatland Monokai (SL).tmTheme",
+	"font_size": 10,
+	"ignored_packages":
+	[
+		"Vintage",
+		"Markdown"
+	],
+	"theme": "Flatland Dark.sublime-theme",
+	"translate_tabs_to_spaces": true
+}

@@ -24,9 +24,6 @@ Bundle 'ervandew/supertab'
 " neocomplcache
 Bundle 'Shougo/neocomplcache.vim'
 
-" Multiple
-Bundle 'terryma/vim-multiple-cursors.vim'
-
 " Ctrlp
 Bundle 'kien/ctrlp.vim'
 

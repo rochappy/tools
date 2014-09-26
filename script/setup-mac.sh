@@ -46,8 +46,7 @@ nvm alias default v0.10
 # Download settings
 rm ~/.zshrc
 rm ~/.alias
-rm -rf ~/.oh-my-zsh
-git clone http://github.com/rochappy/oh-my-zsh ~/.oh-my-zsh
+curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/roc.zsh-theme > ~/.oh-my-zsh/themes/roc.zsh-theme
 curl -L https://raw.github.com/rochappy/PTB/master/settings/.zshrc > ~/.zshrc
 curl -L https://raw.github.com/rochappy/PTB/master/settings/.alias > ~/.alias
 

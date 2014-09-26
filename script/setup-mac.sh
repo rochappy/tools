@@ -41,14 +41,12 @@ curl -# -sL https://get.rvm.io | bash -s stable --ruby
 # Download settings
 rm -rf $user_dir/.oh-my-zsh
 git clone http://github.com/rochappy/oh-my-zsh $user_dir/.oh-my-zsh
-curl -# https://raw.github.com/rochappy/PTB/master/script/zshrc > $user_dir/.zshrc
-curl -# https://raw.github.com/rochappy/PTB/master/settings/vimrc > $user_dir/.vimrc
-echo '' > /root/.bashrc
+curl -# https://raw.github.com/rochappy/PTB/master/settings/.zshrc > $user_dir/.zshrc
+curl -# https://raw.github.com/rochappy/PTB/master/settings/.vimrc > $user_dir/.vimrc
 echo '' > $user_dir/.bashrc
 
 # change owner
 chown -Rf $user:$user $user_dir
 
 chsh -s /bin/zsh $user
-chsh -s /bin/zsh root
 source $user_dir/.zshrc

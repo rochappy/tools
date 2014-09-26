@@ -1,0 +1,41 @@
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red
+    new = green
+[color "status"]
+    added = green
+    changed = yellow
+    untracked = cyan
+[user]
+	name = rochappy
+	email = rochappy.sun@gmail.com
+[core]
+    autocrlf = input
+    editor = /usr/bin/vim
+    quotepath = false
+    pager = less -x4
+[alias]
+    aa = add --all
+    ai = add -i
+    st = status
+    s = show
+    cl = clone --recursive
+    ci = commit
+    ca = commit -a -m
+    br = branch -a
+    co = checkout
+    df = diff -U6
+    ds = diff --staged
+    l = log --graph --all --decorate
+    d = difftool
+    sh = diff-tree --no-commit-id --name-only -r
+[push]
+	default = simple
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f

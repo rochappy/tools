@@ -138,4 +138,5 @@ alias ys-password='openssl rand -base64 32'
 [[ -s "$HOME/.bashrc" ]] && source $HOME/.bashrc
 [[ -s "$HOME/.alias" ]] && source $HOME/.alias
 
+export SVN_EDITOR=vim
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

@@ -137,3 +137,5 @@ alias ys-password='openssl rand -base64 32'
 # Include personal bash profile.
 [[ -s "$HOME/.bashrc" ]] && source $HOME/.bashrc
 [[ -s "$HOME/.alias" ]] && source $HOME/.alias
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

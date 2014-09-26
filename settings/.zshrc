@@ -121,16 +121,7 @@ ys-git-daemon()
 	git daemon --export-all --enable=receive-pack --verbose --port=$port --base-path=$repo_root $repo_list
 }
 
-
 ########################################## Alias ##########################################
-
-# Common bash commands.
-alias le='/opt/local/share/vim/vim74/macros/less.sh'
-alias ll='ls -laFh'
-alias ps='ps -ef'
-
-# Disk usage
-alias du='du -khs'
 
 # Change directory to Desktop.
 alias ys-d='cd ~/Desktop'
@@ -141,12 +132,10 @@ alias ys-b='st ~/.bash_profile'
 # Generate a random password
 alias ys-password='openssl rand -base64 32'
 
-# Clean DS_Store files
-alias ys-clean-ds="find . -name '.DS_Store' -exec rm {} \;"
-
 ########################################## Personal Profile ##########################################
 
 # Include personal bash profile.
 [[ -s "$HOME/.bashrc" ]] && source $HOME/.bashrc
+[[ -s "$HOME/.alias" ]] && source $HOME/.alias
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

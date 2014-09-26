@@ -12,51 +12,47 @@ fi
 user_dir=/Users/$user
 
 # Install ruby
-rm -rf $user_dir/.rvm
-curl -# -sL https://get.rvm.io | bash -s stable --ruby
-echo "install .rvm done"
+rm -rf ~/.rvm
+curl -L -sL https://get.rvm.io | bash -s stable --ruby
 
 # Install Homebrew
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-echo "install Homebrew done"
+#ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
 
 # Install git and zsh
+#brew install git
+curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/.gitconfig > ~/.gitconfig
 
-brew install git
-curl -# https://raw.githubusercontent.com/rochappy/PTB/master/settings/.gitconfig > ~/.gitconfig
+rm -rf ~/.oh-my-zsh
 curl -L http://install.ohmyz.sh | sh
-echo "install git and oh-my-zsh done"
+
 
 # Install vundle
-rm -rf $user_dir/.vim/bundle/vundle
-git clone https://github.com/gmarik/vundle.git $user_dir/.vim/bundle/vundle
+rm ~/.vimrc
+rm -rf ~/.vim/bundle/vundle
+curl -L https://raw.github.com/rochappy/PTB/master/settings/.vimrc > ~/.vimrc
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 vim +BundleInstall +qall
-echo 'vim bundle done'
 
 # Install node
-rm -rf $user_dir/.nvm
-git clone https://github.com/creationix/nvm.git $user_dir/.nvm
-source $user_dir/.nvm/nvm.sh
-echo 'nvm install done'
-
+rm -rf ~/.nvm
+git clone https://github.com/creationix/nvm.git ~/.nvm
+source ~/.nvm/nvm.sh
 
 #nvm install 0.10
 nvm install 0.10
 nvm alias default v0.10
 
 # Download settings
-rm -rf $user_dir/.oh-my-zsh
 rm ~/.zshrc
-rm ~/.vimrc
 rm ~/.alias
-git clone http://github.com/rochappy/oh-my-zsh $user_dir/.oh-my-zsh
-curl -# https://raw.github.com/rochappy/PTB/master/settings/.zshrc > $user_dir/.zshrc
-curl -# https://raw.github.com/rochappy/PTB/master/settings/.vimrc > $user_dir/.vimrc
-curl -# https://raw.github.com/rochappy/PTB/master/settings/.alias > $user_dir/.alias
-echo '' > $user_dir/.bashrc
+rm -rf ~/.oh-my-zsh
+git clone http://github.com/rochappy/oh-my-zsh ~/.oh-my-zsh
+curl -L https://raw.github.com/rochappy/PTB/master/settings/.zshrc > ~/.zshrc
+curl -L https://raw.github.com/rochappy/PTB/master/settings/.alias > ~/.alias
 
 # change owner
 chown -Rf $user:$user $user_dir
 
 chsh -s /bin/zsh $user
-source $user_dir/.zshrc
+source ~/.zshrc

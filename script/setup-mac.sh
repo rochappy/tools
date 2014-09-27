@@ -17,6 +17,7 @@ curl -# -sL https://get.rvm.io | bash -s stable --ruby
 echo "install .rvm done"
 
 # Install Homebrew
+rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 echo "install Homebrew done"
 
@@ -54,6 +55,15 @@ curl -# https://raw.github.com/rochappy/PTB/master/settings/.zshrc > $user_dir/.
 curl -# https://raw.github.com/rochappy/PTB/master/settings/.vimrc > $user_dir/.vimrc
 curl -# https://raw.github.com/rochappy/PTB/master/settings/.alias > $user_dir/.alias
 echo '' > $user_dir/.bashrc
+
+
+
+
+# download
+mkdir -p ~/git
+git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git ~/git/iTerm2-Color-Schemes 
+
+curl -o iTerm2_v2_0.zip 'https://iterm2.com/downloads/stable/iTerm2_v2_0.zip'
 
 # change owner
 chown -Rf $user:$user $user_dir

@@ -15,10 +15,11 @@
 	name = rochappy
 	email = rochappy.sun@gmail.com
 [core]
-    autocrlf = input
+	autocrlf = false
     editor = /usr/bin/vim
     quotepath = false
     pager = less -x4
+	excludesfile = /Users/roc/.gitignore_global
 [alias]
     aa = add --all
     ai = add -i
@@ -34,8 +35,15 @@
     l = log --graph --all --decorate
     d = difftool
     sh = diff-tree --no-commit-id --name-only -r
+    pbae = push bae musician
 [push]
 	default = simple
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

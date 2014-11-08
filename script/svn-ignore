@@ -3,16 +3,16 @@
 # svn-ignore
 
 # usage:
-#   svn-ignore file/to/ignore ...
+#   svn-ignore [file or dir]
 
 for f; do
     d=`dirname "$f"`
     b=`basename "$f"`
-    ignore=`svn propget svn:ignore "$d"`
+    ignore=`svn pg svn:ignore "$d"`
     if [ -n "$ignore" ]; then
         ignore="$ignore
 "
     fi
     ignore="$ignore$b"
-    svn propset svn:ignore "$ignore" "$d"
+    svn ps svn:ignore "$ignore" "$d"
 done

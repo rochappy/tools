@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# quote https://github.com/ysmood/Kit
 # update: rochappy
 user=$1
 
@@ -25,7 +24,7 @@ brew install wget
 curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/.gitconfig > ~/.gitconfig
 
 rm -rf ~/.oh-my-zsh
-curl -L http://install.ohmyz.sh | sh
+git clone http://github.com/ysmood/oh-my-zsh $user_dir/.oh-my-zsh
 
 
 # Install vundle
@@ -50,9 +49,6 @@ rm ~/.alias
 curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/roc.zsh-theme > ~/.oh-my-zsh/themes/roc.zsh-theme
 curl -L https://raw.github.com/rochappy/PTB/master/settings/.zshrc > ~/.zshrc
 curl -L https://raw.github.com/rochappy/PTB/master/settings/.alias > ~/.alias
-
-
-
 
 # download
 mkdir -p ~/git

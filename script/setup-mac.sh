@@ -1,6 +1,6 @@
 #!/bin/bash
-
 # update: rochappy
+
 user=$1
 
 if [ ! $1 ]; then
@@ -19,13 +19,23 @@ rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew install wget
 
+#Github caskroom/cask 
+brew tap caskroom/cask 
+
+#install brew-cask
+brew install brew-cask
+
+#update
+brew update && brew upgrade brew-cask && brew cleanup 
+brew cask install qlcolorcode qlmarkdown quicklook-json betterzipql
+brew cask install google-chrome sublime-text alfred
+
 # Install git and zsh
 #brew install git
 curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/.gitconfig > ~/.gitconfig
 
 rm -rf ~/.oh-my-zsh
 git clone http://github.com/ysmood/oh-my-zsh $user_dir/.oh-my-zsh
-
 
 # Install vundle
 rm ~/.vimrc
@@ -42,6 +52,10 @@ source ~/.nvm/nvm.sh
 #nvm install 0.10
 nvm install 0.10
 nvm alias default v0.10
+
+npm install -g coffee-script
+npm install -g grunt-cli
+npm install -g gulp
 
 # Download settings
 rm ~/.zshrc

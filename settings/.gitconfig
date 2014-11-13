@@ -19,7 +19,7 @@
     editor = /usr/bin/vim
     quotepath = false
     pager = less -x4
-	excludesfile = /Users/roc/.gitignore_global
+	excludesfile = /Users/roc/.gitignore
 [alias]
     aa = add --all
     ai = add -i

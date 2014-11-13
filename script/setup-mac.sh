@@ -20,15 +20,15 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 brew install wget
 
 #Github caskroom/cask 
-brew tap caskroom/cask 
+#brew tap caskroom/cask 
 
 #install brew-cask
-brew install brew-cask
+#brew install brew-cask
 
-#update
-brew update && brew upgrade brew-cask && brew cleanup 
-brew cask install qlcolorcode qlmarkdown quicklook-json betterzipql
-brew cask install google-chrome sublime-text alfred
+#update Over the wall 
+#brew update && brew upgrade brew-cask && brew cleanup 
+#brew cask install qlcolorcode qlmarkdown quicklook-json betterzipql
+#brew cask install google-chrome sublime-text alfred
 
 # Install git and zsh
 #brew install git

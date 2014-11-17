@@ -1,13 +1,8 @@
 # system
 alias host='sudo vi /etc/hosts'
-alias hideallfile='defaults write com.apple.finder AppleShowAllFiles -bool false'
-alias showallfile='defaults write com.apple.finder AppleShowAllFiles -bool true'
 alias o='open .'
 alias md='mkdir'
 alias vima='vi ~/.alias'
-
-# Clean DS_Store files
-alias clean-ds="find . -name '.DS_Store' -exec rm {} \;"
 
 # Common bash commands.
 alias le='/opt/local/share/vim/vim74/macros/less.sh'
@@ -15,13 +10,17 @@ alias ll='ls -laFh'
 alias cls='clear'
 alias ps='ps -ef'
 
+# Generate a random password
+alias rp-password='openssl rand -base64 32'
+
 # Disk usage
-alias du='du -khs'
+alias rp-du='du -khs'
+
+# Clean DS_Store files
+alias rp-clean-ds="find . -name '.DS_Store' -exec rm {} \;"
 
 # goagent
 alias goa='python ~/git/goagent/local/proxy.py'
-
-
 
 # work
 alias baidu='node ~/git/ys-bnac/app.js'
@@ -32,8 +31,6 @@ alias up='svn up'
 alias svnadd='svn add ./* --force'
 alias sync='nodesync -f'
 alias gruntc='grunt concurrent'
-alias compass_new='rvm use ruby-2.1.2@compass1.0.1 --default'
-alias compass_old='rvm use ruby-2.1.2@compass0.12.6 --default'
 
 # dev
 alias st='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'

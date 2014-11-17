@@ -30,17 +30,8 @@ fi
 
 ########################################## Functions ##########################################
 
-# Add new path to environment path
-ys-add-evn-path()
+rp-show-hide()
 {
-	PATH="$1:${PATH}"
-	export PATH
-}
-
-# Toggle the visibility of hidden files.
-ys-show-hide()
-{
-	# check if hidden files are visible and store result in a variable
 	isVisible=$(defaults read com.apple.finder AppleShowAllFiles)
 
 	# toggle visibility based on variables value
@@ -54,38 +45,14 @@ ys-show-hide()
 	killall Finder
 }
 
-# Copy the ssh public key.
-ys-key()
+rp-key()
 {
 	cat $HOME/.ssh/id_rsa.pub | pbcopy
 	echo 'ssh public key copied.'
 }
 
-# Return the specified ip address's geo info.
-ys-ip()
-{
-	python -c "
-import json, urllib2, urlparse
-s = '$1'
-if s.find('://') < 0:
-  s = 'http://' + s
-host = urlparse.urlparse(s).netloc
-f = urllib2.urlopen('https://dazzlepod.com/ip/%s.json' % host)
-s = f.read()
-info = json.loads(s)
-max_l = 0
-for k in info:
-  l = len(str(k))
-  if max_l < l:
-  	max_l = l
-format = '%%%ds: %%s' % max_l
-for k, v in info.iteritems():
-  print(format % (k, v))
-"
-}
-
 # A better way to ping.
-ys-ping()
+rp-ping()
 {
 	ret=$(python -c "
 import urlparse
@@ -98,7 +65,7 @@ print(host)
 	ping $ret
 }
 
-ys-git-daemon()
+rp-git-daemon()
 {
 	repo_root=$1
 	port=$2
@@ -108,8 +75,7 @@ ys-git-daemon()
 	git daemon --export-all --enable=receive-pack --verbose --port=$port --base-path=$repo_root $repo_list
 }
 
-
-svn-ignore()
+rp-svn-ignore()
 {
 	for f; do
 	    d=`dirname "$f"`
@@ -124,14 +90,8 @@ svn-ignore()
 	done
 }
 
-########################################## Alias ##########################################
-
-# Generate a random password
-alias ys-password='openssl rand -base64 32'
-
 ########################################## Personal Profile ##########################################
 
-# Include personal bash profile.
 [[ -s "$HOME/.bashrc" ]] && source $HOME/.bashrc
 [[ -s "$HOME/.alias" ]] && source $HOME/.alias
 

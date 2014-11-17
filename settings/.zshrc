@@ -61,19 +61,6 @@ ys-key()
 	echo 'ssh public key copied.'
 }
 
-ys-copy()
-{
-	cat "$1" | pbcopy
-	echo '>> copied.'
-}
-
-# Copy present working dir.
-ys-pwd()
-{
-	pwd
-	echo -n $PWD | pbcopy
-}
-
 # Return the specified ip address's geo info.
 ys-ip()
 {
@@ -121,13 +108,23 @@ ys-git-daemon()
 	git daemon --export-all --enable=receive-pack --verbose --port=$port --base-path=$repo_root $repo_list
 }
 
+
+svn-ignore()
+{
+	for f; do
+	    d=`dirname "$f"`
+	    b=`basename "$f"`
+	    ignore=`svn pg svn:ignore "$d"`
+	    if [ -n "$ignore" ]; then
+	        ignore="$ignore
+	"
+	    fi
+	    ignore="$ignore$b"
+	    svn ps svn:ignore "$ignore" "$d"
+	done
+}
+
 ########################################## Alias ##########################################
-
-# Change directory to Desktop.
-alias ys-d='cd ~/Desktop'
-
-# Open with Sublime Text 2.
-alias ys-b='st ~/.bash_profile'
 
 # Generate a random password
 alias ys-password='openssl rand -base64 32'

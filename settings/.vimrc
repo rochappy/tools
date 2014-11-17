@@ -13,7 +13,7 @@ Bundle 'gmarik/vundle'
 " My Bundles:
 
 " emmet
-Bundle 'mattn/emmet-vim' 
+Bundle 'mattn/emmet-vim'
 
 Bundle 'Lokaltog/vim-powerline'
 
@@ -45,7 +45,7 @@ Bundle 'sickill/vim-monokai'
 
 Bundle 'kchmck/vim-coffee-script'
 
-Bundle 'vim-scripts/vim-stylus' 
+Bundle 'vim-scripts/vim-stylus'
 
 
 filetype plugin indent on     " required!
@@ -73,7 +73,7 @@ set autoindent
 let &t_Co=256
 syntax enable
 
-colorscheme monokai 
+colorscheme monokai
 
 
 " neocomplcache auto completion
@@ -116,7 +116,7 @@ let g:ctrlp_custom_ignore = {
 " https://github.com/kien/ctrlp.vim/blob/master/doc/ctrlp.txt
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_max_height = 25 
+let g:ctrlp_max_height = 25
 " nerdtree
 " autocmd vimenter * NERDTree
 

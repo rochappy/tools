@@ -96,8 +96,6 @@ set hlsearch
 map <F10> :NERDTreeToggle<CR>
 map <Space> <C-F>
 map <C-c>,<C-p> :CtrlP<CR>
-map <C-m> :!svn commit -m 'by rochappy commit'<CR>
-
 
 " emmet settings
 let g:user_emmet_install_global = 0

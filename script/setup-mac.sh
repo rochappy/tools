@@ -36,7 +36,7 @@ curl -L -sL https://get.rvm.io | bash -s stable --ruby
 curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/.gitconfig > ~/.gitconfig
 
 rm -rf ~/.oh-my-zsh
-git clone http://github.com/ysmood/oh-my-zsh $user_dir/.oh-my-zsh
+git clone https://github.com/ysmood/oh-my-zsh.git $user_dir/.oh-my-zsh
 
 # Install vundle
 rm ~/.vimrc

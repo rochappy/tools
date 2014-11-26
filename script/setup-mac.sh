@@ -15,9 +15,10 @@ rm -rf ~/.rvm
 curl -L -sL https://get.rvm.io | bash -s stable --ruby
 
 # Install Homebrew
-rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew install wget
+#rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
+#rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
+#ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+#brew install wget
 
 #Github caskroom/cask 
 #brew tap caskroom/cask 
@@ -35,7 +36,7 @@ brew install wget
 curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/.gitconfig > ~/.gitconfig
 
 rm -rf ~/.oh-my-zsh
-git clone http://github.com/ysmood/oh-my-zsh $user_dir/.oh-my-zsh
+git clone https://github.com/ysmood/oh-my-zsh.git $user_dir/.oh-my-zsh
 
 # Install vundle
 rm ~/.vimrc

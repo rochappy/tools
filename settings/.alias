@@ -1,5 +1,6 @@
 # system
 alias host='sudo vi /etc/hosts'
+alias sthost='sudo st /etc/hosts'
 alias o='open .'
 alias md='mkdir'
 alias vima='vi ~/.alias'

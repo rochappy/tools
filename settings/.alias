@@ -36,3 +36,4 @@ alias gruntc='grunt concurrent'
 # dev
 alias st='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 alias stree='/Applications/SourceTree.app/Contents/MacOS/SourceTree'
+alias mou='/Applications/Mou.app/Contents/MacOS/Mou'

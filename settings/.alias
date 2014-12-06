@@ -28,10 +28,12 @@ alias baidu='node ~/git/ys-bnac/app.js'
 alias sns='cd ~/project/sns'
 alias m='cd ~/project/music'
 alias svncim='svn ci -m "commit by rochappy"'
-alias up='svn up'
 alias svnadd='svn add ./* --force'
 alias sync='nodesync -f'
 alias gruntc='grunt concurrent'
+
+alias ng-restart='sudo nginx -s reload'
+alias ng-stop='sudo nginx -s stop'
 
 # dev
 alias st='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'

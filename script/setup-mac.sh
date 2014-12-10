@@ -64,6 +64,7 @@ rm ~/.alias
 curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/roc.zsh-theme > ~/.oh-my-zsh/themes/roc.zsh-theme
 curl -L https://raw.github.com/rochappy/PTB/master/settings/.zshrc > ~/.zshrc
 curl -L https://raw.github.com/rochappy/PTB/master/settings/.alias > ~/.alias
+curl -L https://raw.github.com/rochappy/PTB/master/settings/.npmrc > ~/.npmrc
 
 # download
 mkdir -p ~/git

@@ -8,5 +8,3 @@ curl -L https://raw.githubusercontent.com/rochappy/PTB/master/script/setup-mac.s
 sudo sh setup-mac.sh you username
 ```
 
-
-

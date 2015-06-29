@@ -1,6 +1,8 @@
 #!/bin/bash
 # update: rochappy
 
+# https://github.com/Homebrew/linuxbrew/wiki/Standalone-Installation#create-symlinks-for-gcc linux 安卓gcc 问题汇总
+
 user=$1
 
 if [ ! $1 ]; then
@@ -18,6 +20,7 @@ curl -L -sL https://get.rvm.io | bash -s stable --ruby
 #rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 #rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 #ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+#ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
 #brew install wget
 
 #Github caskroom/cask 

@@ -97,6 +97,7 @@ rp-svn-ignore()
 
 export SVN_EDITOR=vim
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$PATH:$HOME/.linuxbrew/bin:/usr/local/bin:/usr/bin:/bin"
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

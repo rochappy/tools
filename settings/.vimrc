@@ -47,6 +47,8 @@ Bundle 'kchmck/vim-coffee-script'
 
 Bundle 'vim-scripts/vim-stylus'
 
+Bundle 'vim-scripts/nginx.vim'
+
 
 filetype plugin indent on     " required!
 "

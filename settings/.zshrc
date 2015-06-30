@@ -92,7 +92,6 @@ rp-svn-ignore()
 
 ########################################## Personal Profile ##########################################
 
-[[ -s "$HOME/.bashrc" ]] && source $HOME/.bashrc
 [[ -s "$HOME/.alias" ]] && source $HOME/.alias
 
 export SVN_EDITOR=vim

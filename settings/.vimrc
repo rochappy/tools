@@ -10,36 +10,19 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 
-" My Bundles:
-
-" emmet
 Bundle 'mattn/emmet-vim'
 
 Bundle 'Lokaltog/vim-powerline'
 
-" supertab
 Bundle 'ervandew/supertab'
 
-" vim-commentary
-" Bundle 'tpope/vim-commentary'
-
-" emmet-vim
-" Bundle 'mattn/emmet-vim'
-
-" neocomplcache
 Bundle 'Shougo/neocomplcache.vim'
 
-" Multiple
 Bundle 'terryma/vim-multiple-cursors'
 
-" Ctrlp
 Bundle 'kien/ctrlp.vim'
 
-" nerdtree
 Bundle 'scrooloose/nerdtree'
-
-" solarized
-" Bundle 'altercation/vim-colors-solarized'
 
 Bundle 'sickill/vim-monokai'
 
@@ -48,6 +31,10 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'vim-scripts/vim-stylus'
 
 Bundle 'vim-scripts/nginx.vim'
+
+Bundle 'tpope/vim-fugitive' 
+
+Bundle 'pangloss/vim-javascript' 
 
 
 filetype plugin indent on     " required!

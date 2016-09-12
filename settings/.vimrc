@@ -71,7 +71,7 @@ let g:neocomplcache_enable_auto_select = 1
 
 " Set line number
 set nu
-" set rnu
+set rnu
 
 " Auto indent
 set autoindent

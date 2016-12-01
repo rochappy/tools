@@ -6,6 +6,8 @@
 	"installed_packages":
 	[
 		"42 Headers",
+		"Agila Theme",
+		"Boxy Theme",
 		"Alignment",
 		"AngularJS",
 		"AutoFileName",
@@ -38,12 +40,6 @@
 		"SublimeLinter",
 		"Syntax Highlighting for Sass",
 		"Terminal",
-		"Terminal In Packages",
-		"Theme - Flatland",
-		"Theme - Soda",
-		"Theme - Soda SolarizedDark",
-		"Theme - Sodarized",
-		"Theme - Spacegray",
 		"TrailingSpaces",
 		"Underscorejs snippets"
 	]

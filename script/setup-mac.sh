@@ -54,8 +54,9 @@ git clone https://github.com/creationix/nvm.git ~/.nvm
 source ~/.nvm/nvm.sh
 
 #nvm install 0.10
-nvm install 0.10
-nvm alias default v0.10
+nvm install v4.6.0
+nvm install v6.0.0
+nvm alias default v4.6.0
 
 npm install -g coffee-script
 npm install -g grunt-cli

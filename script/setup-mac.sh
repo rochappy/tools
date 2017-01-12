@@ -17,20 +17,20 @@ rm -rf ~/.rvm
 curl -L -sL https://get.rvm.io | bash -s stable --ruby
 
 # Install Homebrew
-#rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
-#rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
-#ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-#ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
-#brew install wget
+rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
+rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
+brew install wget
 
-#Github caskroom/cask 
-#brew tap caskroom/cask 
+#Github caskroom/cask
+#brew tap caskroom/cask
 
 #install brew-cask
 #brew install brew-cask
 
-#update Over the wall 
-#brew update && brew upgrade brew-cask && brew cleanup 
+#update Over the wall
+#brew update && brew upgrade brew-cask && brew cleanup
 #brew cask install qlcolorcode qlmarkdown quicklook-json betterzipql
 #brew cask install google-chrome sublime-text alfred
 
@@ -59,7 +59,7 @@ nvm install v6.0.0
 nvm alias default v4.6.0
 
 npm install -g coffee-script
-npm install -g grunt-cli
+# npm install -g grunt-cli
 npm install -g gulp
 
 # Download settings
@@ -70,12 +70,15 @@ curl -L https://raw.github.com/rochappy/PTB/master/settings/.zshrc > ~/.zshrc
 curl -L https://raw.github.com/rochappy/PTB/master/settings/.alias > ~/.alias
 curl -L https://raw.github.com/rochappy/PTB/master/settings/.npmrc > ~/.npmrc
 
-# download
+# download iTerm color
 mkdir -p ~/git
-git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git ~/git/iTerm2-Color-Schemes 
+git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git ~/git/iTerm2-Color-Schemes
+
+# download App
 #wget https://iterm2.com/downloads/stable/iTerm2_v2_0.zip
 #wget https://cachefly.alfredapp.com/Alfred_2.4_279.zip
 #wget http://bettertouchtool.net/BetterTouchTool.zip
+
 # change owner
 chown -Rf $user:$user $user_dir
 

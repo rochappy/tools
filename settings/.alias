@@ -1,4 +1,4 @@
-# system
+# System
 alias host='sudo vi /etc/hosts'
 alias sthost='sudo st /etc/hosts'
 alias o='open .'
@@ -20,22 +20,14 @@ alias rp-du='du -khs'
 # Clean DS_Store files
 alias rp-clean-ds="find . -name '.DS_Store' -exec rm {} \;"
 
-# goagent
-alias goa='python ~/git/goagent/local/proxy.py'
-
-# work
-alias baidu='node ~/git/ys-bnac/app.js'
-alias sns='cd ~/project/sns'
-alias m='cd ~/project/music'
-alias svncim='svn ci -m "commit by rochappy"'
+# Project
 alias svnadd='svn add ./* --force'
-alias sync='nodesync -f'
-alias gruntc='grunt concurrent'
 
+# Nginx
 alias ng-restart='sudo nginx -s reload'
 alias ng-stop='sudo nginx -s stop'
 
-# dev
+# APP open
 alias st='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 alias stree='/Applications/SourceTree.app/Contents/MacOS/SourceTree'
 alias mou='/Applications/Mou.app/Contents/MacOS/Mou'

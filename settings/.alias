@@ -13,6 +13,7 @@ alias ps='ps -ef'
 
 # Generate a random password
 alias rp-password='openssl rand -base64 32'
+
 # Clear DNS cache
 alias rp-clean-dnscache='sudo killall -HUP mDNSResponder'
 

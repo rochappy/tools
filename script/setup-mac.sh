@@ -1,5 +1,4 @@
 #!/bin/bash
-# update: rochappy
 
 # https://github.com/Homebrew/linuxbrew/wiki/Standalone-Installation#create-symlinks-for-gcc linux 安卓gcc 问题汇总
 

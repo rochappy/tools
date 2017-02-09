@@ -12,7 +12,7 @@
     changed = yellow
     untracked = cyan
 [user]
-	name = rochappy
+	name = Roc
 	email = rochappy.sun@gmail.com
 [core]
 	autocrlf = false

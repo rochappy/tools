@@ -38,7 +38,7 @@ git clone https://github.com/ysmood/oh-my-zsh.git $user_dir/.oh-my-zsh
 # Install vundle
 rm $user_dir/.vimrc
 rm -rf $user_dir/.vim/bundle/vundle
-curl -# https://raw.github.com/rochappy/PTB/master/settings/vimrc > $user_dir/.vimrc
+curl -L https://raw.github.com/rochappy/PTB/master/settings/.vimrc > $user_dir/.vimrc
 git clone https://github.com/gmarik/vundle.git $user_dir/.vim/bundle/vundle
 vim +BundleInstall +qall
 

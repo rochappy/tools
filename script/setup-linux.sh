@@ -25,7 +25,6 @@ curl -L -sL https://get.rvm.io | bash -s stable --ruby
 # Install Homebrew
 rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
 brew install wget
 

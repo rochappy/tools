@@ -8,6 +8,8 @@ call vundle#rc()
 " let Vundle manage Vundle
 " required!
 
+" My Bundles:
+
 Bundle 'gmarik/vundle'
 
 Bundle 'mattn/emmet-vim'
@@ -30,11 +32,25 @@ Bundle 'kchmck/vim-coffee-script'
 
 Bundle 'vim-scripts/vim-stylus'
 
+Bundle 'godlygeek/tabular'
+
+Bundle 'plasticboy/vim-markdown'
+
+Bundle 'digitaltoad/vim-jade'
+
 Bundle 'vim-scripts/nginx.vim'
 
-Bundle 'tpope/vim-fugitive' 
+Bundle 'tpope/vim-fugitive'
 
-Bundle 'pangloss/vim-javascript' 
+" React
+Bundle 'pangloss/vim-javascript'
+Bundle 'mxw/vim-jsx'
+
+" Es6
+Bundle 'tomtom/tlib_vim'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'garbas/vim-snipmate'
+Bundle 'isRuslan/vim-es6'
 
 
 filetype plugin indent on     " required!

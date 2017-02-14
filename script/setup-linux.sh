@@ -26,9 +26,6 @@ curl -L -sL https://get.rvm.io | bash -s stable --ruby
 rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
-brew install wget
-
-curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/.gitconfig > $user_dir/.gitconfig
 
 rm -rf $user_dir/.oh-my-zsh
 git clone https://github.com/ysmood/oh-my-zsh.git $user_dir/.oh-my-zsh
@@ -63,6 +60,7 @@ curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/roc.zsh-t
 curl -L https://raw.github.com/rochappy/PTB/master/settings/.zshrc > $user_dir/.zshrc
 curl -L https://raw.github.com/rochappy/PTB/master/settings/.alias > $user_dir/.alias
 curl -L https://raw.github.com/rochappy/PTB/master/settings/.npmrc > $user_dir/.npmrc
+curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/.gitconfig > $user_dir/.gitconfig
 
 # change owner
 chown -Rf $user:$user $user_dir

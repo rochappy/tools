@@ -25,7 +25,6 @@ curl -L -sL https://get.rvm.io | bash -s stable --ruby
 # Install Homebrew
 rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
 brew install wget
 
@@ -38,7 +37,7 @@ git clone https://github.com/ysmood/oh-my-zsh.git $user_dir/.oh-my-zsh
 # Install vundle
 rm $user_dir/.vimrc
 rm -rf $user_dir/.vim/bundle/vundle
-curl -# https://raw.github.com/rochappy/PTB/master/settings/vimrc > $user_dir/.vimrc
+curl -L https://raw.github.com/rochappy/PTB/master/settings/.vimrc > $user_dir/.vimrc
 git clone https://github.com/gmarik/vundle.git $user_dir/.vim/bundle/vundle
 vim +BundleInstall +qall
 

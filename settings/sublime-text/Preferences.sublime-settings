@@ -14,7 +14,6 @@
 		"bower_components",
 		"cache",
 		".sass-cache",
-		".nobone"
 	],
 	"font_face": "Yahei_Monaco",
 	"font_size": 9,
@@ -23,7 +22,7 @@
 		"Markdown",
 		"Vintage"
 	],
-	"theme": "Flatland Dark.sublime-theme",
+	"theme": "Agila Monokai.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"word_separators": "./\\()\"':,.;<>~!@#$%^&*|+=[]{}`~?",
 	"word_wrap": true

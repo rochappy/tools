@@ -38,7 +38,7 @@ brew install wget
 curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/.gitconfig > ~/.gitconfig
 
 rm -rf ~/.oh-my-zsh
-git clone https://github.com/ysmood/oh-my-zsh.git $user_dir/.oh-my-zsh
+git clone https://github.com/robbyrussell/oh-my-zsh.git $user_dir/.oh-my-zsh
 
 # Install vundle
 rm ~/.vimrc
@@ -52,14 +52,13 @@ rm -rf ~/.nvm
 git clone https://github.com/creationix/nvm.git ~/.nvm
 source ~/.nvm/nvm.sh
 
-#nvm install 0.10
-nvm install v4.6.0
+#nvm install
 nvm install v6.0.0
-nvm alias default v4.6.0
+nvm alias default v6.0.0
 
-npm install -g coffee-script
+# npm install -g coffee-script
 # npm install -g grunt-cli
-npm install -g gulp
+# npm install -g gulp
 
 # Download settings
 rm ~/.zshrc

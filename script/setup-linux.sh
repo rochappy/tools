@@ -28,7 +28,7 @@ rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
 
 rm -rf $user_dir/.oh-my-zsh
-git clone https://github.com/ysmood/oh-my-zsh.git $user_dir/.oh-my-zsh
+git clone https://github.com/robbyrussell/oh-my-zsh.git $user_dir/.oh-my-zsh
 
 
 # Install vundle

@@ -11,9 +11,6 @@
     added = green
     changed = yellow
     untracked = cyan
-[user]
-	name = Roc
-	email = rochappy.sun@gmail.com
 [core]
 	autocrlf = false
     editor = /usr/bin/vim

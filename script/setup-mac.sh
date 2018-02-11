@@ -12,33 +12,31 @@ fi
 user_dir=/Users/$user
 
 # Install ruby
-rm -rf ~/.rvm
-curl -L -sL https://get.rvm.io | bash -s stable --ruby
+# rm -rf ~/.rvm
+# curl -L -sL https://get.rvm.io | bash -s stable --ruby
+
 
 # Install Homebrew
 rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
-rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
 brew install wget
 
-#Github caskroom/cask
-#brew tap caskroom/cask
-
-#install brew-cask
-#brew install brew-cask
 
 #update Over the wall
 #brew update && brew upgrade brew-cask && brew cleanup
-#brew cask install qlcolorcode qlmarkdown quicklook-json betterzipql
 #brew cask install google-chrome sublime-text alfred
+
 
 # Install git and zsh
 #brew install git
 curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/.gitconfig > ~/.gitconfig
 
-rm -rf ~/.oh-my-zsh
+
+# Install zsh
+rm -rf ~/.oh-my-zsh highlighting
 git clone https://github.com/robbyrussell/oh-my-zsh.git $user_dir/.oh-my-zsh
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $user_dir/.oh-my-zsh/plugins/zsh-syntax-highlighting
+
 
 # Install vundle
 rm ~/.vimrc
@@ -53,12 +51,10 @@ git clone https://github.com/creationix/nvm.git ~/.nvm
 source ~/.nvm/nvm.sh
 
 #nvm install
-nvm install v6.0.0
-nvm alias default v6.0.0
+nvm install 9.0.0
+nvm alias default 9.0.0
 
-# npm install -g coffee-script
-# npm install -g grunt-cli
-# npm install -g gulp
+npm install -g lodash express pm2 webpack mongoose colors
 
 # Download settings
 rm ~/.zshrc

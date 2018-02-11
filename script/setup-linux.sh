@@ -9,27 +9,16 @@ fi
 
 user_dir=/home/$user
 
-# Install git and zsh
-sudo apt-get install git zsh
-
-# ln -fs $user_dir/.zshrc /root/.zshrc
-# ln -fs $user_dir/.oh-my-zsh /root/.oh-my-zsh
-# ln -fs $user_dir/.vimrc /root/.vimrc
-# ln -fs $user_dir/.vim /root/.vim
-# ln -fs $user_dir/.nvm /root/.nvm
-
 # Install ruby
 rm -rf $user_dir/.rvm
 curl -L -sL https://get.rvm.io | bash -s stable --ruby
 
 # Install Homebrew
-rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
-rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
 
+# Install git and zsh
 rm -rf $user_dir/.oh-my-zsh
 git clone https://github.com/robbyrussell/oh-my-zsh.git $user_dir/.oh-my-zsh
-
 
 # Install vundle
 rm $user_dir/.vimrc
@@ -45,13 +34,10 @@ git clone https://github.com/creationix/nvm.git $user_dir/.nvm
 source $user_dir/.nvm/nvm.sh
 
 #nvm install 0.10
-nvm install v4.6.0
-nvm install v6.0.0
-nvm alias default v4.6.0
+nvm install v9
+nvm alias default v9
 
-npm install -g coffee-script
-# npm install -g grunt-cli
-npm install -g gulp
+npm install -g lodash express pm2 webpack mongoose colors
 
 # Download settings
 rm $user_dir/.zshrc

@@ -34,4 +34,4 @@ alias ng-stop='sudo nginx -s stop'
 # APP open
 alias st='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 alias stree='/Applications/SourceTree.app/Contents/MacOS/SourceTree'
-alias mweb = '/Applications/MWeb.app/Contents/MacOS/MWeb'
+alias mweb='/Applications/MWeb.app/Contents/MacOS/MWeb'

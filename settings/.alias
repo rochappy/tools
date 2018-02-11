@@ -6,7 +6,6 @@ alias md='mkdir'
 alias vima='vi ~/.alias'
 
 # Common bash commands.
-alias le='/opt/local/share/vim/vim74/macros/less.sh'
 alias ll='ls -laFh'
 alias cls='clear'
 alias ps='ps -ef'
@@ -24,7 +23,9 @@ alias rp-du='du -khs'
 alias rp-clean-ds="find . -name '.DS_Store' -exec rm {} \;"
 
 # Project
-alias svnadd='svn add ./* --force'
+
+# Work
+alias sshdev='ssh name@ip'
 
 # Nginx
 alias ng-restart='sudo nginx -s reload'
@@ -33,4 +34,4 @@ alias ng-stop='sudo nginx -s stop'
 # APP open
 alias st='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 alias stree='/Applications/SourceTree.app/Contents/MacOS/SourceTree'
-alias mou='/Applications/Mou.app/Contents/MacOS/Mou'
+alias mweb = '/Applications/MWeb.app/Contents/MacOS/MWeb'

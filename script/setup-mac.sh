@@ -51,8 +51,8 @@ git clone https://github.com/creationix/nvm.git ~/.nvm
 source ~/.nvm/nvm.sh
 
 #nvm install
-nvm install 9.0.0
-nvm alias default 9.0.0
+nvm install node
+nvm alias default node
 
 npm install -g lodash express pm2 webpack mongoose colors
 

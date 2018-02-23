@@ -31,7 +31,8 @@
     l = log --graph --all --decorate
     d = difftool
     sh = diff-tree --no-commit-id --name-only -r
-
+[push]
+	default = simple
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f

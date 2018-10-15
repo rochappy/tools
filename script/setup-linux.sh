@@ -10,13 +10,13 @@ fi
 user_dir=/home/$user
 
 # Install ruby
-rm -rf $user_dir/.rvm
-curl -L -sL https://get.rvm.io | bash -s stable --ruby
+# rm -rf $user_dir/.rvm
+# curl -L -sL https://get.rvm.io | bash -s stable --ruby
 
 # Install Homebrew
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
 
-# Install git and zsh
+# Install zsh
 rm -rf $user_dir/.oh-my-zsh
 git clone https://github.com/robbyrussell/oh-my-zsh.git $user_dir/.oh-my-zsh
 
@@ -33,11 +33,11 @@ rm -rf $user_dir/.nvm
 git clone https://github.com/creationix/nvm.git $user_dir/.nvm
 source $user_dir/.nvm/nvm.sh
 
-#nvm install 0.10
+#nvm install node
 nvm install node
 nvm alias default node
 
-npm install -g lodash express pm2 webpack mongoose colors
+npm install -g lodash pm2 colors
 
 # Download settings
 rm $user_dir/.zshrc

@@ -19,6 +19,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/i
 # Install zsh
 rm -rf $user_dir/.oh-my-zsh
 git clone https://github.com/robbyrussell/oh-my-zsh.git $user_dir/.oh-my-zsh
+git clone https://github.com/robbyrussell/oh-my-zsh.git $user_dir/.oh-my-zsh/plugins/zsh-syntax-highlighting
 
 # Install vundle
 rm $user_dir/.vimrc

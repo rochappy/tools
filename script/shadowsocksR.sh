@@ -1,381 +1,155 @@
-#! /bin/bash
+#!/usr/bin/env bash
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
+export PATH
+#=================================================================#
+#   System Required:  CentOS 6,7, Debian, Ubuntu                  #
+#   Description: One click Install ShadowsocksR Server            #
+#   Author: Teddysun <i@teddysun.com>                             #
+#   Thanks: @breakwa11 <https://twitter.com/breakwa11>            #
+#   Intro:  https://shadowsocks.be/9.html                         #
+#=================================================================#
 
+clear
+echo
+echo "#############################################################"
+echo "# One click Install ShadowsocksR Server                     #"
+echo "# Intro: https://shadowsocks.be/9.html                      #"
+echo "# Author: Teddysun <i@teddysun.com>                         #"
+echo "# Github: https://github.com/shadowsocksr/shadowsocksr      #"
+echo "#############################################################"
+echo
+
+libsodium_file="libsodium-1.0.17"
+libsodium_url="https://github.com/jedisct1/libsodium/releases/download/1.0.17/libsodium-1.0.17.tar.gz"
+shadowsocks_r_file="shadowsocksr-3.2.2"
+shadowsocks_r_url="https://github.com/shadowsocksrr/shadowsocksr/archive/3.2.2.tar.gz"
+
+#Current folder
+cur_dir=`pwd`
+# Stream Ciphers
+ciphers=(
+none
+aes-256-cfb
+aes-192-cfb
+aes-128-cfb
+aes-256-cfb8
+aes-192-cfb8
+aes-128-cfb8
+aes-256-ctr
+aes-192-ctr
+aes-128-ctr
+chacha20-ietf
+chacha20
+salsa20
+xchacha20
+xsalsa20
+rc4-md5
+)
+# Reference URL:
+# https://github.com/shadowsocksr-rm/shadowsocks-rss/blob/master/ssr.md
+# https://github.com/shadowsocksrr/shadowsocksr/commit/a3cf0254508992b7126ab1151df0c2f10bf82680
+# Protocol
+protocols=(
+origin
+verify_deflate
+auth_sha1_v4
+auth_sha1_v4_compatible
+auth_aes128_md5
+auth_aes128_sha1
+auth_chain_a
+auth_chain_b
+auth_chain_c
+auth_chain_d
+auth_chain_e
+auth_chain_f
+)
+# obfs
+obfs=(
+plain
+http_simple
+http_simple_compatible
+http_post
+http_post_compatible
+tls1.2_ticket_auth
+tls1.2_ticket_auth_compatible
+tls1.2_ticket_fastauth
+tls1.2_ticket_fastauth_compatible
+)
+# Color
 red='\033[0;31m'
 green='\033[0;32m'
 yellow='\033[0;33m'
 plain='\033[0m'
 
-os='ossystem'
-password='roc'
-port='1024'
-libsodium_file="libsodium-1.0.16"
-libsodium_url="https://github.com/jedisct1/libsodium/releases/download/1.0.16/libsodium-1.0.16.tar.gz"
+# Make sure only root can run our script
+[[ $EUID -ne 0 ]] && echo -e "[${red}Error${plain}] This script must be run as root!" && exit 1
 
-fly_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-kernel_ubuntu_url="http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.10.2/linux-image-4.10.2-041002-generic_4.10.2-041002.201703120131_amd64.deb"
-kernel_ubuntu_file="linux-image-4.10.2-041002-generic_4.10.2-041002.201703120131_amd64.deb"
-
-usage () {
-        cat $fly_dir/sshelp
+# Disable selinux
+disable_selinux(){
+    if [ -s /etc/selinux/config ] && grep 'SELINUX=enforcing' /etc/selinux/config; then
+        sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+        setenforce 0
+    fi
 }
 
-DIR=`pwd`
+#Check system
+check_sys(){
+    local checkType=$1
+    local value=$2
 
-wrong_para_prompt() {
-    echo -e "[${red}错误${plain}] 参数输入错误!$1"
-}
+    local release=''
+    local systemPackage=''
 
-install_ss() {
-        if [[ "$#" -lt 1 ]]
-        then
-          wrong_para_prompt "请输入至少一个参数作为密码"
-          return 1
-        fi
-        password=$1
-        if [[ "$#" -ge 2 ]]
-        then
-          port=$2
-        fi
-        if [[ $port -le 0 || $port -gt 65535 ]]
-        then
-          wrong_para_prompt "端口号输入格式错误，请输入1到65535"
-          exit 1
-        fi
-        check_os
-        check_dependency
-        download_files
-        ps -ef | grep -v grep | grep -i "ssserver" > /dev/null 2>&1
-        if [ $? -eq 0 ]; then
-                ssserver -c /etc/shadowsocks.json -d stop
-        fi
-        generate_config $password $port
-        if [ ${os} == 'centos' ]
-        then
-                firewall_set
-        fi
-        install
-        cleanup
-}
-
-uninstall_ss() {
-        read -p "确定要卸载ss吗？(y/n) :" option
-        [ -z ${option} ] && option="n"
-        if [ "${option}" == "y" ] || [ "${option}" == "Y" ]
-        then
-                ps -ef | grep -v grep | grep -i "ssserver" > /dev/null 2>&1
-                if [ $? -eq 0 ]; then
-                        ssserver -c /etc/shadowsocks.json -d stop
-                fi
-                case $os in
-                        'ubuntu'|'debian')
-                                update-rc.d -f ss-fly remove
-                                ;;
-                        'centos')
-                                chkconfig --del ss-fly
-                                ;;
-                esac
-                rm -f /etc/shadowsocks.json
-                rm -f /var/run/shadowsocks.pid
-                rm -f /var/log/shadowsocks.log
-                if [ -f /usr/local/shadowsocks_install.log ]; then
-                        cat /usr/local/shadowsocks_install.log | xargs rm -rf
-                fi
-                echo "ss卸载成功！"
-        else
-                echo
-                echo "卸载取消"
-        fi
-}
-
-install_bbr() {
-	[[ -d "/proc/vz" ]] && echo -e "[${red}错误${plain}] 你的系统是OpenVZ架构的，不支持开启BBR。" && exit 1
-	check_os
-	check_bbr_status
-	if [ $? -eq 0 ]
-	then
-		echo -e "[${green}提示${plain}] TCP BBR加速已经开启成功。"
-		exit 0
-	fi
-	check_kernel_version
-	if [ $? -eq 0 ]
-	then
-		echo -e "[${green}提示${plain}] 你的系统版本高于4.9，直接开启BBR加速。"
-		sysctl_config
-		echo -e "[${green}提示${plain}] TCP BBR加速开启成功"
-		exit 0
-	fi
-	    
-	if [[ x"${os}" == x"centos" ]]; then
-        	install_elrepo
-        	yum --enablerepo=elrepo-kernel -y install kernel-ml kernel-ml-devel
-        	if [ $? -ne 0 ]; then
-            		echo -e "[${red}错误${plain}] 安装内核失败，请自行检查。"
-            		exit 1
-        	fi
-    	elif [[ x"${os}" == x"debian" || x"${os}" == x"ubuntu" ]]; then
-        	[[ ! -e "/usr/bin/wget" ]] && apt-get -y update && apt-get -y install wget
-        	#get_latest_version
-        	#[ $? -ne 0 ] && echo -e "[${red}错误${plain}] 获取最新内核版本失败，请检查网络" && exit 1
-       		 #wget -c -t3 -T60 -O ${deb_kernel_name} ${deb_kernel_url}
-        	#if [ $? -ne 0 ]; then
-            	#	echo -e "[${red}错误${plain}] 下载${deb_kernel_name}失败，请自行检查。"
-            	#	exit 1
-       		#fi
-        	#dpkg -i ${deb_kernel_name}
-        	#rm -fv ${deb_kernel_name}
-		wget ${kernel_ubuntu_url}
-		if [ $? -ne 0 ]
-		then
-			echo -e "[${red}错误${plain}] 下载内核失败，请自行检查。"
-			exit 1
-		fi
-		dpkg -i ${kernel_ubuntu_file}
-    	else
-       	 	echo -e "[${red}错误${plain}] 脚本不支持该操作系统，请修改系统为CentOS/Debian/Ubuntu。"
-        	exit 1
-    	fi
-
-    	install_config
-    	sysctl_config
-    	reboot_os
-}
-
-install_ssr() {
-        check_os
-        case $os in
-                'ubuntu'|'debian')
-		     apt-get -y update
-                     apt-get -y install wget
-                     ;;
-                'centos')
-                     yum install -y wget
-                     ;;
-        esac
-	wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR.sh
-	chmod +x shadowsocksR.sh
-	./shadowsocksR.sh 2>&1 | tee shadowsocksR.log
-}
-
-check_os_() {
-        source /etc/os-release
-	local os_tmp=$(echo $ID | tr [A-Z] [a-z])
-        case $os_tmp in
-                ubuntu|debian)
-                os='ubuntu'
-                ;;
-                centos)
-                os='centos'
-                ;;
-                *)
-                echo -e "[${red}错误${plain}] 本脚本暂时只支持Centos/Ubuntu/Debian系统，如需用本脚本，请先修改你的系统类型"
-                exit 1
-                ;;
-        esac
-}
-
-check_os() {
     if [[ -f /etc/redhat-release ]]; then
-        os="centos"
-    elif cat /etc/issue | grep -Eqi "debian"; then
-        os="debian"
-    elif cat /etc/issue | grep -Eqi "ubuntu"; then
-        os="ubuntu"
-    elif cat /etc/issue | grep -Eqi "centos|red hat|redhat"; then
-        os="centos"
-    elif cat /proc/version | grep -Eqi "debian"; then
-        os="debian"
-    elif cat /proc/version | grep -Eqi "ubuntu"; then
-        os="ubuntu"
-    elif cat /proc/version | grep -Eqi "centos|red hat|redhat"; then
-        os="centos"
-    fi
-}
-
-check_bbr_status() {
-    local param=$(sysctl net.ipv4.tcp_available_congestion_control | awk '{print $3}')
-    if [[ x"${param}" == x"bbr" ]]; then
-        return 0
-    else
-        return 1
-    fi
-}
-
-version_ge(){
-    test "$(echo "$@" | tr " " "\n" | sort -rV | head -n 1)" == "$1"
-}
-
-check_kernel_version() {
-    local kernel_version=$(uname -r | cut -d- -f1)
-    if version_ge ${kernel_version} 4.9; then
-        return 0
-    else
-        return 1
-    fi
-}
-
-sysctl_config() {
-    sed -i '/net.core.default_qdisc/d' /etc/sysctl.conf
-    sed -i '/net.ipv4.tcp_congestion_control/d' /etc/sysctl.conf
-    echo "net.core.default_qdisc = fq" >> /etc/sysctl.conf
-    echo "net.ipv4.tcp_congestion_control = bbr" >> /etc/sysctl.conf
-    sysctl -p >/dev/null 2>&1
-}
-
-install_elrepo() {
-    if centosversion 5; then
-        echo -e "[${red}错误${plain}] 脚本不支持CentOS 5。"
-        exit 1
+        release="centos"
+        systemPackage="yum"
+    elif grep -Eqi "debian|raspbian" /etc/issue; then
+        release="debian"
+        systemPackage="apt"
+    elif grep -Eqi "ubuntu" /etc/issue; then
+        release="ubuntu"
+        systemPackage="apt"
+    elif grep -Eqi "centos|red hat|redhat" /etc/issue; then
+        release="centos"
+        systemPackage="yum"
+    elif grep -Eqi "debian|raspbian" /proc/version; then
+        release="debian"
+        systemPackage="apt"
+    elif grep -Eqi "ubuntu" /proc/version; then
+        release="ubuntu"
+        systemPackage="apt"
+    elif grep -Eqi "centos|red hat|redhat" /proc/version; then
+        release="centos"
+        systemPackage="yum"
     fi
 
-    rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
-
-    if centosversion 6; then
-        rpm -Uvh http://www.elrepo.org/elrepo-release-6-8.el6.elrepo.noarch.rpm
-    elif centosversion 7; then
-        rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm
-    fi
-
-    if [ ! -f /etc/yum.repos.d/elrepo.repo ]; then
-        echo -e "[${red}错误${plain}] 安装elrepo失败，请自行检查。"
-        exit 1
-    fi
-}
-
-get_latest_version() {
-
-    latest_version=$(wget -qO- http://kernel.ubuntu.com/~kernel-ppa/mainline/ | awk -F'\"v' '/v[4-9]./{print $2}' | cut -d/ -f1 | grep -v -  | sort -V | tail -1)
-
-    [ -z ${latest_version} ] && return 1
-
-    if [[ `getconf WORD_BIT` == "32" && `getconf LONG_BIT` == "64" ]]; then
-        deb_name=$(wget -qO- http://kernel.ubuntu.com/~kernel-ppa/mainline/v${latest_version}/ | grep "linux-image" | grep "generic" | awk -F'\">' '/amd64.deb/{print $2}' | cut -d'<' -f1 | head -1)
-        deb_kernel_url="http://kernel.ubuntu.com/~kernel-ppa/mainline/v${latest_version}/${deb_name}"
-        deb_kernel_name="linux-image-${latest_version}-amd64.deb"
-    else
-        deb_name=$(wget -qO- http://kernel.ubuntu.com/~kernel-ppa/mainline/v${latest_version}/ | grep "linux-image" | grep "generic" | awk -F'\">' '/i386.deb/{print $2}' | cut -d'<' -f1 | head -1)
-        deb_kernel_url="http://kernel.ubuntu.com/~kernel-ppa/mainline/v${latest_version}/${deb_name}"
-        deb_kernel_name="linux-image-${latest_version}-i386.deb"
-    fi
-
-    [ ! -z ${deb_name} ] && return 0 || return 1
-}
-
-get_opsy() {
-    [ -f /etc/redhat-release ] && awk '{print ($1,$3~/^[0-9]/?$3:$4)}' /etc/redhat-release && return
-    [ -f /etc/os-release ] && awk -F'[= "]' '/PRETTY_NAME/{print $3,$4,$5}' /etc/os-release && return
-    [ -f /etc/lsb-release ] && awk -F'[="]+' '/DESCRIPTION/{print $2}' /etc/lsb-release && return
-}
-
-opsy=$( get_opsy )
-arch=$( uname -m )
-lbit=$( getconf LONG_BIT )
-kern=$( uname -r )
-
-check_dependency() {
-        case $os in
-                'ubuntu'|'debian')
-                apt-get -y update
-                apt-get -y install python python-dev python-setuptools openssl libssl-dev curl wget unzip gcc automake autoconf make libtool
-                ;;
-                'centos')
-                yum install -y python python-devel python-setuptools openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
-        esac
-}
-
-install_config() {
-    if [[ x"${os}" == x"centos" ]]; then
-        if centosversion 6; then
-            if [ ! -f "/boot/grub/grub.conf" ]; then
-                echo -e "[${red}错误${plain}] 没有找到/boot/grub/grub.conf文件。"
-                exit 1
-            fi
-            sed -i 's/^default=.*/default=0/g' /boot/grub/grub.conf
-        elif centosversion 7; then
-            if [ ! -f "/boot/grub2/grub.cfg" ]; then
-                echo -e "[${red}错误${plain}] 没有找到/boot/grub2/grub.cfg文件。"
-                exit 1
-            fi
-            grub2-set-default 0
-        fi
-    elif [[ x"${os}" == x"debian" || x"${os}" == x"ubuntu" ]]; then
-        /usr/sbin/update-grub
-    fi
-}
-
-reboot_os() {
-    echo
-    echo -e "[${green}提示${plain}] 系统需要重启BBR才能生效。"
-    read -p "是否立马重启 [y/n]" is_reboot
-    if [[ ${is_reboot} == "y" || ${is_reboot} == "Y" ]]; then
-        reboot
-    else
-        echo -e "[${green}提示${plain}] 取消重启。其自行执行reboot命令。"
-        exit 0
-    fi
-}
-
-download_files() {
-        if ! wget --no-check-certificate -O ${libsodium_file}.tar.gz ${libsodium_url}
-        then
-                echo -e "[${red}错误${plain}] 下载${libsodium_file}.tar.gz失败!"
-                exit 1
-        fi
-        if ! wget --no-check-certificate -O shadowsocks-master.zip https://github.com/shadowsocks/shadowsocks/archive/master.zip
-        then
-                echo -e "[${red}错误${plain}] shadowsocks安装包文件下载失败！"
-                exit 1
-        fi
-}
-
-generate_config() {
-    cat > /etc/shadowsocks.json<<-EOF
-{
-    "server":"0.0.0.0",
-    "server_port":$2,
-    "local_address":"127.0.0.1",
-    "local_port":1080,
-    "password":"$1",
-    "timeout":300,
-    "method":"aes-256-cfb",
-    "fast_open":false
-}
-EOF
-}
-
-firewall_set(){
-    echo -e "[${green}信息${plain}] 正在设置防火墙..."
-    if centosversion 6; then
-        /etc/init.d/iptables status > /dev/null 2>&1
-        if [ $? -eq 0 ]; then
-            iptables -L -n | grep -i ${port} > /dev/null 2>&1
-            if [ $? -ne 0 ]; then
-                iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport ${port} -j ACCEPT
-                iptables -I INPUT -m state --state NEW -m udp -p udp --dport ${port} -j ACCEPT
-                /etc/init.d/iptables save
-                /etc/init.d/iptables restart
-            else
-                echo -e "[${green}信息${plain}] port ${port}已经开放。"
-            fi
+    if [[ "${checkType}" == "sysRelease" ]]; then
+        if [ "${value}" == "${release}" ]; then
+            return 0
         else
-            echo -e "[${yellow}警告${plain}] 防火墙（iptables）好像已经停止或没有安装，如有需要请手动关闭防火墙。"
+            return 1
         fi
-    elif centosversion 7; then
-        systemctl status firewalld > /dev/null 2>&1
-        if [ $? -eq 0 ]; then
-            firewall-cmd --permanent --zone=public --add-port=${port}/tcp
-            firewall-cmd --permanent --zone=public --add-port=${port}/udp
-            firewall-cmd --reload
+    elif [[ "${checkType}" == "packageManager" ]]; then
+        if [ "${value}" == "${systemPackage}" ]; then
+            return 0
         else
-            echo -e "[${yellow}警告${plain}] 防火墙（iptables）好像已经停止或没有安装，如有需要请手动关闭防火墙。"
+            return 1
         fi
     fi
-    echo -e "[${green}信息${plain}] 防火墙设置成功。"
 }
 
+# Get version
+getversion(){
+    if [[ -s /etc/redhat-release ]]; then
+        grep -oE  "[0-9.]+" /etc/redhat-release
+    else
+        grep -oE  "[0-9.]+" /etc/issue
+    fi
+}
+
+# CentOS version
 centosversion(){
-    if [ ${os} == 'centos' ]
-    then
+    if check_sys sysRelease centos; then
         local code=$1
         local version="$(getversion)"
         local main_ver=${version%%.*}
@@ -389,72 +163,7 @@ centosversion(){
     fi
 }
 
-getversion(){
-    if [[ -s /etc/redhat-release ]]; then
-        grep -oE  "[0-9.]+" /etc/redhat-release
-    else
-        grep -oE  "[0-9.]+" /etc/issue
-    fi
-}
-
-install() {
-        if [ ! -f /usr/lib/libsodium.a ]
-        then 
-                cd ${DIR}
-                tar zxf ${libsodium_file}.tar.gz
-                cd ${libsodium_file}
-                ./configure --prefix=/usr && make && make install
-                if [ $? -ne 0 ] 
-                then 
-                        echo -e "[${red}错误${plain}] libsodium安装失败!"
-                        cleanup
-                exit 1  
-                fi
-        fi      
-        ldconfig
-        
-        cd ${DIR}
-        unzip -q shadowsocks-master.zip
-        if [ $? -ne 0 ]
-        then 
-                echo -e "[${red}错误${plain}] 解压缩失败，请检查unzip命令"
-                cleanup
-                exit 1
-        fi      
-        cd ${DIR}/shadowsocks-master
-        python setup.py install --record /usr/local/shadowsocks_install.log
-        if [ -f /usr/bin/ssserver ] || [ -f /usr/local/bin/ssserver ]
-        then 
-                cp $fly_dir/ss-fly /etc/init.d/
-                chmod +x /etc/init.d/ss-fly
-                case $os in
-                        'ubuntu'|'debian')
-                                update-rc.d ss-fly defaults
-                                ;;
-                        'centos')
-                                chkconfig --add ss-fly
-                                chkconfig ss-fly on
-                                ;;
-                esac            
-                ssserver -c /etc/shadowsocks.json -d start
-        else    
-                echo -e "[${red}错误${plain}] ss服务器安装失败"
-                cleanup
-                exit 1
-        fi      
-        echo -e "[${green}成功${plain}] 安装成功！"
-        echo -e "你的服务器地址（IP）：\033[41;37m $(get_ip) \033[0m"
-        echo -e "你的密码            ：\033[41;37m ${password} \033[0m"
-        echo -e "你的端口            ：\033[41;37m ${port} \033[0m"
-        echo -e "你的加密方式        ：\033[41;37m aes-256-cfb \033[0m"
-        get_ss_link
-}
-
-cleanup() {
-        cd ${DIR}
-        rm -rf shadowsocks-master.zip shadowsocks-master ${libsodium_file}.tar.gz ${libsodium_file}
-}
-
+# Get public IP address
 get_ip(){
     local IP=$( ip addr | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | egrep -v "^192\.168|^172\.1[6-9]\.|^172\.2[0-9]\.|^172\.3[0-2]\.|^10\.|^127\.|^255\.|^0\." | head -n 1 )
     [ -z ${IP} ] && IP=$( wget -qO- -t1 -T2 ipv4.icanhazip.com )
@@ -462,57 +171,344 @@ get_ip(){
     [ ! -z ${IP} ] && echo ${IP} || echo
 }
 
-get_ss_link(){
-    if [ ! -f "/etc/shadowsocks.json" ]; then
-        echo 'shdowsocks配置文件不存在，请检查（/etc/shadowsocks.json）'
+get_char(){
+    SAVEDSTTY=`stty -g`
+    stty -echo
+    stty cbreak
+    dd if=/dev/tty bs=1 count=1 2> /dev/null
+    stty -raw
+    stty echo
+    stty $SAVEDSTTY
+}
+
+# Pre-installation settings
+pre_install(){
+    if check_sys packageManager yum || check_sys packageManager apt; then
+        # Not support CentOS 5
+        if centosversion 5; then
+            echo -e "$[{red}Error${plain}] Not supported CentOS 5, please change to CentOS 6+/Debian 7+/Ubuntu 12+ and try again."
+            exit 1
+        fi
+    else
+        echo -e "[${red}Error${plain}] Your OS is not supported. please change OS to CentOS/Debian/Ubuntu and try again."
         exit 1
     fi
-    local tmp=$(echo -n "`get_config_value method`:`get_config_value password`@`get_ip`:`get_config_value server_port`" | base64 -w0)
-    echo -e "你的ss链接：\033[41;37m ss://${tmp} \033[0m"
+    # Set ShadowsocksR config password
+    echo "Please enter password for ShadowsocksR:"
+    read -p "(Default password: teddysun.com):" shadowsockspwd
+    [ -z "${shadowsockspwd}" ] && shadowsockspwd="teddysun.com"
+    echo
+    echo "---------------------------"
+    echo "password = ${shadowsockspwd}"
+    echo "---------------------------"
+    echo
+    # Set ShadowsocksR config port
+    while true
+    do
+    dport=$(shuf -i 9000-19999 -n 1)
+    echo -e "Please enter a port for ShadowsocksR [1-65535]"
+    read -p "(Default port: ${dport}):" shadowsocksport
+    [ -z "${shadowsocksport}" ] && shadowsocksport=${dport}
+    expr ${shadowsocksport} + 1 &>/dev/null
+    if [ $? -eq 0 ]; then
+        if [ ${shadowsocksport} -ge 1 ] && [ ${shadowsocksport} -le 65535 ] && [ ${shadowsocksport:0:1} != 0 ]; then
+            echo
+            echo "---------------------------"
+            echo "port = ${shadowsocksport}"
+            echo "---------------------------"
+            echo
+            break
+        fi
+    fi
+    echo -e "[${red}Error${plain}] Please enter a correct number [1-65535]"
+    done
+
+    # Set shadowsocksR config stream ciphers
+    while true
+    do
+    echo -e "Please select stream cipher for ShadowsocksR:"
+    for ((i=1;i<=${#ciphers[@]};i++ )); do
+        hint="${ciphers[$i-1]}"
+        echo -e "${green}${i}${plain}) ${hint}"
+    done
+    read -p "Which cipher you'd select(Default: ${ciphers[1]}):" pick
+    [ -z "$pick" ] && pick=2
+    expr ${pick} + 1 &>/dev/null
+    if [ $? -ne 0 ]; then
+        echo -e "[${red}Error${plain}] Please enter a number"
+        continue
+    fi
+    if [[ "$pick" -lt 1 || "$pick" -gt ${#ciphers[@]} ]]; then
+        echo -e "[${red}Error${plain}] Please enter a number between 1 and ${#ciphers[@]}"
+        continue
+    fi
+    shadowsockscipher=${ciphers[$pick-1]}
+    echo
+    echo "---------------------------"
+    echo "cipher = ${shadowsockscipher}"
+    echo "---------------------------"
+    echo
+    break
+    done
+
+    # Set shadowsocksR config protocol
+    while true
+    do
+    echo -e "Please select protocol for ShadowsocksR:"
+    for ((i=1;i<=${#protocols[@]};i++ )); do
+        hint="${protocols[$i-1]}"
+        echo -e "${green}${i}${plain}) ${hint}"
+    done
+    read -p "Which protocol you'd select(Default: ${protocols[0]}):" protocol
+    [ -z "$protocol" ] && protocol=1
+    expr ${protocol} + 1 &>/dev/null
+    if [ $? -ne 0 ]; then
+        echo -e "[${red}Error${plain}] Input error, please input a number"
+        continue
+    fi
+    if [[ "$protocol" -lt 1 || "$protocol" -gt ${#protocols[@]} ]]; then
+        echo -e "[${red}Error${plain}] Input error, please input a number between 1 and ${#protocols[@]}"
+        continue
+    fi
+    shadowsockprotocol=${protocols[$protocol-1]}
+    echo
+    echo "---------------------------"
+    echo "protocol = ${shadowsockprotocol}"
+    echo "---------------------------"
+    echo
+    break
+    done
+
+    # Set shadowsocksR config obfs
+    while true
+    do
+    echo -e "Please select obfs for ShadowsocksR:"
+    for ((i=1;i<=${#obfs[@]};i++ )); do
+        hint="${obfs[$i-1]}"
+        echo -e "${green}${i}${plain}) ${hint}"
+    done
+    read -p "Which obfs you'd select(Default: ${obfs[0]}):" r_obfs
+    [ -z "$r_obfs" ] && r_obfs=1
+    expr ${r_obfs} + 1 &>/dev/null
+    if [ $? -ne 0 ]; then
+        echo -e "[${red}Error${plain}] Input error, please input a number"
+        continue
+    fi
+    if [[ "$r_obfs" -lt 1 || "$r_obfs" -gt ${#obfs[@]} ]]; then
+        echo -e "[${red}Error${plain}] Input error, please input a number between 1 and ${#obfs[@]}"
+        continue
+    fi
+    shadowsockobfs=${obfs[$r_obfs-1]}
+    echo
+    echo "---------------------------"
+    echo "obfs = ${shadowsockobfs}"
+    echo "---------------------------"
+    echo
+    break
+    done
+
+    echo
+    echo "Press any key to start...or Press Ctrl+C to cancel"
+    char=`get_char`
+    # Install necessary dependencies
+    if check_sys packageManager yum; then
+        yum install -y python python-devel python-setuptools openssl openssl-devel curl wget unzip gcc automake autoconf make libtool
+    elif check_sys packageManager apt; then
+        apt-get -y update
+        apt-get -y install python python-dev python-setuptools openssl libssl-dev curl wget unzip gcc automake autoconf make libtool
+    fi
+    cd ${cur_dir}
 }
 
-get_config_value(){
-    cat /etc/shadowsocks.json | grep "\"$1\":"|awk -F ":" '{print $2}'| sed 's/\"//g;s/,//g;s/ //g'
+# Download files
+download_files(){
+    # Download libsodium file
+    if ! wget --no-check-certificate -O ${libsodium_file}.tar.gz ${libsodium_url}; then
+        echo -e "[${red}Error${plain}] Failed to download ${libsodium_file}.tar.gz!"
+        exit 1
+    fi
+    # Download ShadowsocksR file
+    if ! wget --no-check-certificate -O ${shadowsocks_r_file}.tar.gz ${shadowsocks_r_url}; then
+        echo -e "[${red}Error${plain}] Failed to download ShadowsocksR file!"
+        exit 1
+    fi
+    # Download ShadowsocksR init script
+    if check_sys packageManager yum; then
+        if ! wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR -O /etc/init.d/shadowsocks; then
+            echo -e "[${red}Error${plain}] Failed to download ShadowsocksR chkconfig file!"
+            exit 1
+        fi
+    elif check_sys packageManager apt; then
+        if ! wget --no-check-certificate https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocksR-debian -O /etc/init.d/shadowsocks; then
+            echo -e "[${red}Error${plain}] Failed to download ShadowsocksR chkconfig file!"
+            exit 1
+        fi
+    fi
 }
 
-if [ "$#" -eq 0 ]; then
-	usage
-	exit 0
-fi
+# Firewall set
+firewall_set(){
+    echo -e "[${green}Info${plain}] firewall set start..."
+    if centosversion 6; then
+        /etc/init.d/iptables status > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            iptables -L -n | grep -i ${shadowsocksport} > /dev/null 2>&1
+            if [ $? -ne 0 ]; then
+                iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport ${shadowsocksport} -j ACCEPT
+                iptables -I INPUT -m state --state NEW -m udp -p udp --dport ${shadowsocksport} -j ACCEPT
+                /etc/init.d/iptables save
+                /etc/init.d/iptables restart
+            else
+                echo -e "[${green}Info${plain}] port ${shadowsocksport} has been set up."
+            fi
+        else
+            echo -e "[${yellow}Warning${plain}] iptables looks like shutdown or not installed, please manually set it if necessary."
+        fi
+    elif centosversion 7; then
+        systemctl status firewalld > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            default_zone=$(firewall-cmd --get-default-zone)
+            firewall-cmd --permanent --zone=${default_zone} --add-port=${shadowsocksport}/tcp
+            firewall-cmd --permanent --zone=${default_zone} --add-port=${shadowsocksport}/udp
+            firewall-cmd --reload
+        else
+            echo -e "[${yellow}Warning${plain}] firewalld looks like not running or not installed, please enable port ${shadowsocksport} manually if necessary."
+        fi
+    fi
+    echo -e "[${green}Info${plain}] firewall set completed..."
+}
 
-case $1 in
-	-h|h|help )
-		usage
-		exit 0;
-		;;
-	-v|v|version )
-		echo 'Version 1.0'
-		exit 0;
-		;;
-esac
+# Config ShadowsocksR
+config_shadowsocks(){
+    cat > /etc/shadowsocks.json<<-EOF
+{
+    "server":"0.0.0.0",
+    "server_ipv6":"[::]",
+    "server_port":${shadowsocksport},
+    "local_address":"127.0.0.1",
+    "local_port":1080,
+    "password":"${shadowsockspwd}",
+    "timeout":120,
+    "method":"${shadowsockscipher}",
+    "protocol":"${shadowsockprotocol}",
+    "protocol_param":"",
+    "obfs":"${shadowsockobfs}",
+    "obfs_param":"",
+    "redirect":"",
+    "dns_ipv6":false,
+    "fast_open":false,
+    "workers":1
+}
+EOF
+}
 
-if [ "$EUID" -ne 0 ]; then
-	echo -e "[${red}错误${plain}] 必需以root身份运行，请使用sudo命令"
-	exit 1;
-fi
+# Install ShadowsocksR
+install(){
+    # Install libsodium
+    if [ ! -f /usr/lib/libsodium.a ]; then
+        cd ${cur_dir}
+        tar zxf ${libsodium_file}.tar.gz
+        cd ${libsodium_file}
+        ./configure --prefix=/usr && make && make install
+        if [ $? -ne 0 ]; then
+            echo -e "[${red}Error${plain}] libsodium install failed!"
+            install_cleanup
+            exit 1
+        fi
+    fi
 
-case $1 in
-	-i|i|install )
-        	install_ss $2 $3
-		;;
-        -bbr )
-        	install_bbr
-                ;;
-        -ssr )
-        	install_ssr
-                ;;
-	-uninstall )
-		uninstall_ss
-		;;
-        -sslink )
-                get_ss_link
-                ;;
-	* )
-		usage
-		;;
+    ldconfig
+    # Install ShadowsocksR
+    cd ${cur_dir}
+    tar zxf ${shadowsocks_r_file}.tar.gz
+    mv ${shadowsocks_r_file}/shadowsocks /usr/local/
+    if [ -f /usr/local/shadowsocks/server.py ]; then
+        chmod +x /etc/init.d/shadowsocks
+        if check_sys packageManager yum; then
+            chkconfig --add shadowsocks
+            chkconfig shadowsocks on
+        elif check_sys packageManager apt; then
+            update-rc.d -f shadowsocks defaults
+        fi
+        /etc/init.d/shadowsocks start
+
+        clear
+        echo
+        echo -e "Congratulations, ShadowsocksR server install completed!"
+        echo -e "Your Server IP        : \033[41;37m $(get_ip) \033[0m"
+        echo -e "Your Server Port      : \033[41;37m ${shadowsocksport} \033[0m"
+        echo -e "Your Password         : \033[41;37m ${shadowsockspwd} \033[0m"
+        echo -e "Your Protocol         : \033[41;37m ${shadowsockprotocol} \033[0m"
+        echo -e "Your obfs             : \033[41;37m ${shadowsockobfs} \033[0m"
+        echo -e "Your Encryption Method: \033[41;37m ${shadowsockscipher} \033[0m"
+        echo
+        echo "Welcome to visit:https://shadowsocks.be/9.html"
+        echo "Enjoy it!"
+        echo
+    else
+        echo "ShadowsocksR install failed, please Email to Teddysun <i@teddysun.com> and contact"
+        install_cleanup
+        exit 1
+    fi
+}
+
+# Install cleanup
+install_cleanup(){
+    cd ${cur_dir}
+    rm -rf ${shadowsocks_r_file}.tar.gz ${shadowsocks_r_file} ${libsodium_file}.tar.gz ${libsodium_file}
+}
+
+
+# Uninstall ShadowsocksR
+uninstall_shadowsocksr(){
+    printf "Are you sure uninstall ShadowsocksR? (y/n)"
+    printf "\n"
+    read -p "(Default: n):" answer
+    [ -z ${answer} ] && answer="n"
+    if [ "${answer}" == "y" ] || [ "${answer}" == "Y" ]; then
+        /etc/init.d/shadowsocks status > /dev/null 2>&1
+        if [ $? -eq 0 ]; then
+            /etc/init.d/shadowsocks stop
+        fi
+        if check_sys packageManager yum; then
+            chkconfig --del shadowsocks
+        elif check_sys packageManager apt; then
+            update-rc.d -f shadowsocks remove
+        fi
+        rm -f /etc/shadowsocks.json
+        rm -f /etc/init.d/shadowsocks
+        rm -f /var/log/shadowsocks.log
+        rm -rf /usr/local/shadowsocks
+        echo "ShadowsocksR uninstall success!"
+    else
+        echo
+        echo "uninstall cancelled, nothing to do..."
+        echo
+    fi
+}
+
+# Install ShadowsocksR
+install_shadowsocksr(){
+    disable_selinux
+    pre_install
+    download_files
+    config_shadowsocks
+    if check_sys packageManager yum; then
+        firewall_set
+    fi
+    install
+    install_cleanup
+}
+
+# Initialization step
+action=$1
+[ -z $1 ] && action=install
+case "$action" in
+    install|uninstall)
+        ${action}_shadowsocksr
+        ;;
+    *)
+        echo "Arguments error! [${action}]"
+        echo "Usage: `basename $0` [install|uninstall]"
+        ;;
 esac

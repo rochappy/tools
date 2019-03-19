@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# https://github.com/Homebrew/linuxbrew/wiki/Standalone-Installation#create-symlinks-for-gcc linux 安卓gcc 问题汇总
-
 user=$1
 
 if [ ! $1 ]; then
@@ -19,7 +17,7 @@ user_dir=/Users/$user
 # Install Homebrew
 rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew install wget
+brew install wget #jq icdiff htop ag tldr figlet mycli
 
 
 #update Over the wall

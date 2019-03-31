@@ -52,6 +52,9 @@ Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'garbas/vim-snipmate'
 Bundle 'isRuslan/vim-es6'
 
+Bundle 'posva/vim-vue'
+Bundle 'rudes/vim-java'
+
 
 filetype plugin indent on     " required!
 "
@@ -97,6 +100,11 @@ syntax on
 
 " search highlight
 set hlsearch
+set cursorline
+set cursorcolumn
+set foldmethod=syntax
+set nofoldenable
+
 " key map
 map <F10> :NERDTreeToggle<CR>
 map <Space> <C-F>

@@ -30,10 +30,11 @@ brew install wget #jq icdiff htop ag tldr figlet mycli
 curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/.gitconfig > ~/.gitconfig
 
 
-# Install zsh
+# Install zsh and plugins
 rm -rf ~/.oh-my-zsh highlighting
 git clone https://github.com/robbyrussell/oh-my-zsh.git $user_dir/.oh-my-zsh
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $user_dir/.oh-my-zsh/plugins/zsh-syntax-highlighting
+git clone https://github.com/rochappy/docker-alias.git $user_dir/.oh-my-zsh/plugins/docker-alias
 
 
 # Install vundle

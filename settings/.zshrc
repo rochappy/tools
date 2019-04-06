@@ -9,7 +9,7 @@ ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="roc"
 
-plugins=(git zsh-syntax-highlighting sublime node nvm web-search yum zsh_reload vundle urltools systemadmin osx iterm2_profile go docker)
+plugins=(git zsh-syntax-highlighting sublime node nvm web-search yum zsh_reload vundle urltools systemadmin osx iterm2_profile go docker docker-alias python npm)
 
 if [[ -s $ZSH/oh-my-zsh.sh ]]; then
 	source $ZSH/oh-my-zsh.sh

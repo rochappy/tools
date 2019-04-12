@@ -27,7 +27,7 @@ brew install wget #jq icdiff htop ag tldr figlet mycli
 
 # Install git and zsh
 #brew install git
-curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/.gitconfig > ~/.gitconfig
+curl -L https://raw.githubusercontent.com/rochappy/tools/master/settings/.gitconfig > ~/.gitconfig
 
 
 # Install zsh and plugins
@@ -40,7 +40,7 @@ git clone https://github.com/rochappy/docker-alias.git $user_dir/.oh-my-zsh/plug
 # Install vundle
 rm ~/.vimrc
 rm -rf ~/.vim/bundle/vundle
-curl -L https://raw.github.com/rochappy/PTB/master/settings/.vimrc > ~/.vimrc
+curl -L https://raw.github.com/rochappy/tools/master/settings/.vimrc > ~/.vimrc
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 vim +BundleInstall +qall
 
@@ -58,10 +58,10 @@ npm install -g lodash express pm2 webpack mongoose colors
 # Download settings
 rm ~/.zshrc
 rm ~/.alias
-curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/roc.zsh-theme > ~/.oh-my-zsh/themes/roc.zsh-theme
-curl -L https://raw.github.com/rochappy/PTB/master/settings/.zshrc > ~/.zshrc
-curl -L https://raw.github.com/rochappy/PTB/master/settings/.alias > ~/.alias
-curl -L https://raw.github.com/rochappy/PTB/master/settings/.npmrc > ~/.npmrc
+curl -L https://raw.githubusercontent.com/rochappy/tools/master/settings/roc.zsh-theme > ~/.oh-my-zsh/themes/roc.zsh-theme
+curl -L https://raw.github.com/rochappy/tools/master/settings/.zshrc > ~/.zshrc
+curl -L https://raw.github.com/rochappy/tools/master/settings/.alias > ~/.alias
+curl -L https://raw.github.com/rochappy/tools/master/settings/.npmrc > ~/.npmrc
 
 # download iTerm color
 mkdir -p ~/git

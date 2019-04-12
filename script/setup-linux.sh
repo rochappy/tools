@@ -24,7 +24,7 @@ git clone https://github.com/robbyrussell/oh-my-zsh.git $user_dir/.oh-my-zsh/plu
 # Install vundle
 rm $user_dir/.vimrc
 rm -rf $user_dir/.vim/bundle/vundle
-curl -L https://raw.github.com/rochappy/PTB/master/settings/.vimrc > $user_dir/.vimrc
+curl -L https://raw.github.com/rochappy/tools/master/settings/.vimrc > $user_dir/.vimrc
 git clone https://github.com/gmarik/vundle.git $user_dir/.vim/bundle/vundle
 vim +BundleInstall +qall
 
@@ -43,11 +43,11 @@ npm install -g lodash pm2 colors
 # Download settings
 rm $user_dir/.zshrc
 rm $user_dir/.alias
-curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/roc.zsh-theme > $user_dir/.oh-my-zsh/themes/roc.zsh-theme
-curl -L https://raw.github.com/rochappy/PTB/master/settings/.zshrc > $user_dir/.zshrc
-curl -L https://raw.github.com/rochappy/PTB/master/settings/.alias > $user_dir/.alias
-curl -L https://raw.github.com/rochappy/PTB/master/settings/.npmrc > $user_dir/.npmrc
-curl -L https://raw.githubusercontent.com/rochappy/PTB/master/settings/.gitconfig > $user_dir/.gitconfig
+curl -L https://raw.githubusercontent.com/rochappy/tools/master/settings/roc.zsh-theme > $user_dir/.oh-my-zsh/themes/roc.zsh-theme
+curl -L https://raw.github.com/rochappy/tools/master/settings/.zshrc > $user_dir/.zshrc
+curl -L https://raw.github.com/rochappy/tools/master/settings/.alias > $user_dir/.alias
+curl -L https://raw.github.com/rochappy/tools/master/settings/.npmrc > $user_dir/.npmrc
+curl -L https://raw.githubusercontent.com/rochappy/tools/master/settings/.gitconfig > $user_dir/.gitconfig
 
 # change owner
 chown -Rf $user:$user $user_dir

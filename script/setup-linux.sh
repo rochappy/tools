@@ -3,11 +3,29 @@
 user=$1
 
 if [ ! $1 ]; then
-        echo "You must specify a user name."
-        exit
+  echo -n  "please enter user name: "
+  read  user
+
+  if [ ! $user ]; then
+    echo "You must specify a user name."
+    exit
+  fi
 fi
 
 user_dir=/home/$user
+
+cmd='yum'
+if type apt-get >/dev/null 2>&1; then
+  cmd='apt-get'
+fi
+
+if !(type git) >/dev/null 2>&1; then
+  sudo $cmd install git
+fi
+
+if !(type zsh) >/dev/null 2>&1; then
+  sudo $cmd install zsh
+fi
 
 # Install ruby
 # rm -rf $user_dir/.rvm
@@ -52,6 +70,5 @@ curl -L https://raw.githubusercontent.com/rochappy/tools/master/settings/.gitcon
 # change owner
 chown -Rf $user:$user $user_dir
 
-chsh -s /bin/zsh $user
-chsh -s /bin/zsh root
+sudo chsh -s /bin/zsh $user
 source $user_dir/.zshrc

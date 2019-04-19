@@ -54,6 +54,7 @@ Bundle 'isRuslan/vim-es6'
 
 Bundle 'posva/vim-vue'
 Bundle 'rudes/vim-java'
+Bundle 'leafgarland/typescript-vim'
 
 
 filetype plugin indent on     " required!

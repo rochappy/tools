@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-# Default zsh runcom.
-# Oct 2012 y.s.
-# update: rochappy
 
 ################################### OH-MY-ZSH Settings ##########################################
 

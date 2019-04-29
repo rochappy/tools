@@ -32,12 +32,13 @@ fi
 # curl -L -sL https://get.rvm.io | bash -s stable --ruby
 
 # Install Homebrew
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
 
 # Install zsh
 rm -rf $user_dir/.oh-my-zsh
 git clone https://github.com/robbyrussell/oh-my-zsh.git $user_dir/.oh-my-zsh
 git clone https://github.com/robbyrussell/oh-my-zsh.git $user_dir/.oh-my-zsh/plugins/zsh-syntax-highlighting
+git clone https://github.com/rochappy/docker-alias.git $user_dir/.oh-my-zsh/plugins/docker-alias
 
 # Install vundle
 rm $user_dir/.vimrc

@@ -17,7 +17,7 @@ user_dir=/Users/$user
 # Install Homebrew
 rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-brew install wget #jq icdiff htop ag tldr figlet mycli
+brew install wget #jq icdiff htop ag tldr figlet mycli lsd
 
 
 #update Over the wall

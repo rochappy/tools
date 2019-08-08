@@ -87,6 +87,20 @@ rp-svn-ignore()
 	done
 }
 
+proxy () {
+  #export http_proxy="http://127.0.0.1:8001"
+  #export https_proxy="http://127.0.0.1:9090"
+  export ALL_PROXY="socks5://127.0.0.1:1081"
+  echo "socks5 Proxy on"
+}
+
+proxyoff () {
+  #unset http_proxy
+  #unset https_proxy
+  unset ALL_PROXY
+  echo "socks5 Proxy off"
+}
+
 ########################################## Personal Profile ##########################################
 
 [[ -s "$HOME/.alias" ]] && source $HOME/.alias

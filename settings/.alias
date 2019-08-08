@@ -3,9 +3,12 @@ alias host='sudo vi /etc/hosts'
 alias sthost='sudo st /etc/hosts'
 alias o='open .'
 alias md='mkdir'
+alias rmf='rm -rf'
 alias vima='vi ~/.alias'
+alias grep='grep --color=auto'
 
 # Common bash commands.
+# alias ls='lsd'
 alias ll='ls -laFh'
 alias cls='clear'
 alias ps='ps -ef'
@@ -22,16 +25,7 @@ alias rp-du='du -khs'
 # Clean DS_Store files
 alias rp-clean-ds="find . -name '.DS_Store' -exec rm {} \;"
 
-# Project
-
-# Work
-alias sshdev='ssh name@ip'
-
-# Nginx
-alias ng-restart='sudo nginx -s reload'
-alias ng-stop='sudo nginx -s stop'
-
 # APP open
 alias st='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
-alias stree='/Applications/SourceTree.app/Contents/MacOS/SourceTree'
+alias code='/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
 alias mweb='/Applications/MWeb.app/Contents/MacOS/MWeb'

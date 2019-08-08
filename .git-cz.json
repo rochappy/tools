@@ -2,12 +2,15 @@
   "disableEmoji": false,
   "list": [
     "feat",
+    "chore",
+    "perf",
     "fix",
+    "style",
     "docs",
     "test",
-    "dev",
+    "release",
     "refactor",
-    "opti"
+    "ci"
   ],
   "maxMessageLength": 64,
   "minMessageLength": 3,
@@ -24,7 +27,7 @@
   "types": {
     "chore": {
       "description": "Build process or auxiliary tool changes",
-      "emoji": "🛠",
+      "emoji": "🔧",
       "value": "chore"
     },
     "docs": {
@@ -54,7 +57,7 @@
     },
     "ci": {
       "description": "CI related changes",
-      "emoji": "⚙️",
+      "emoji": "📣",
       "value": "ci"
     },
     "refactor": {
@@ -78,7 +81,7 @@
       "value": "opti"
     },
     "dev": {
-      "description": "Build process or auxiliary tool changes",
+      "description": "Development mode",
       "emoji": "✨",
       "value": "dev"
     }

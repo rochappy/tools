@@ -37,7 +37,7 @@ fi
 # Install zsh
 rm -rf $user_dir/.oh-my-zsh
 git clone https://github.com/robbyrussell/oh-my-zsh.git $user_dir/.oh-my-zsh
-git clone https://github.com/robbyrussell/oh-my-zsh.git $user_dir/.oh-my-zsh/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $user_dir/.oh-my-zsh/plugins/zsh-syntax-highlighting
 git clone https://github.com/rochappy/docker-alias.git $user_dir/.oh-my-zsh/plugins/docker-alias
 
 # Install vundle

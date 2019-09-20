@@ -74,7 +74,7 @@ rp-proxy-close () {
 ########################################## Personal Profile ##########################################
 
 [[ -s "$HOME/.alias" ]] && source $HOME/.alias
-[[ -s "$HOME/.private.alias" ]] && source $HOME/.alias
+[[ -s "$HOME/.private.alias" ]] && source $HOME/.private.alias
 
 export SVN_EDITOR=vim
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

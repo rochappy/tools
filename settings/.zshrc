@@ -27,7 +27,7 @@ fi
 
 ########################################## Functions ##########################################
 
-rp-show-hide()
+rp-file-toggle()
 {
 	isVisible=$(defaults read com.apple.finder AppleShowAllFiles)
 
@@ -48,7 +48,6 @@ rp-key()
 	echo 'ssh public key copied.'
 }
 
-# A better way to ping.
 rp-ping()
 {
 	ret=$(python -c "
@@ -62,46 +61,20 @@ print(host)
 	ping $ret
 }
 
-rp-git-daemon()
-{
-	repo_root=$1
-	port=$2
-	repo_list=$3
-
-	echo Listening port $port
-	git daemon --export-all --enable=receive-pack --verbose --port=$port --base-path=$repo_root $repo_list
-}
-
-rp-svn-ignore()
-{
-	for f; do
-	    d=`dirname "$f"`
-	    b=`basename "$f"`
-	    ignore=`svn pg svn:ignore "$d"`
-	    if [ -n "$ignore" ]; then
-	        ignore="$ignore
-	"
-	    fi
-	    ignore="$ignore$b"
-	    svn ps svn:ignore "$ignore" "$d"
-	done
-}
-
-proxy () {
-  #export http_proxy="http://127.0.0.1:8001"
-  #export https_proxy="http://127.0.0.1:9090"
+rp-proxy-open () {
   export HTTP_PROXY="http://127.0.0.1:1081"
-  echo "http Proxy on"
+  echo "http Proxy already open"
 }
 
-proxyoff () {
+rp-proxy-close () {
   unset HTTP_PROXY
-  echo "http Proxy off"
+  echo "http Proxy closed"
 }
 
 ########################################## Personal Profile ##########################################
 
 [[ -s "$HOME/.alias" ]] && source $HOME/.alias
+[[ -s "$HOME/.private.alias" ]] && source $HOME/.alias
 
 export SVN_EDITOR=vim
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

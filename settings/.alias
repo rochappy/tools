@@ -5,6 +5,7 @@ alias o='open .'
 alias md='mkdir'
 alias rmf='rm -rf'
 alias vima='vi ~/.alias'
+alias stvima='st ~/.alias'
 alias grep='grep --color=auto'
 
 # Common bash commands.
@@ -27,5 +28,8 @@ alias rp-clean-ds="find . -name '.DS_Store' -exec rm {} \;"
 
 # APP open
 alias st='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
-alias code='/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
 alias mweb='/Applications/MWeb.app/Contents/MacOS/MWeb'
+alias code='/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
+alias dev='npm run dev'
+
+# SSH

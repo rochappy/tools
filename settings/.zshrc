@@ -90,15 +90,13 @@ rp-svn-ignore()
 proxy () {
   #export http_proxy="http://127.0.0.1:8001"
   #export https_proxy="http://127.0.0.1:9090"
-  export ALL_PROXY="socks5://127.0.0.1:1081"
-  echo "socks5 Proxy on"
+  export HTTP_PROXY="http://127.0.0.1:1081"
+  echo "http Proxy on"
 }
 
 proxyoff () {
-  #unset http_proxy
-  #unset https_proxy
-  unset ALL_PROXY
-  echo "socks5 Proxy off"
+  unset HTTP_PROXY
+  echo "http Proxy off"
 }
 
 ########################################## Personal Profile ##########################################

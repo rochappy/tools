@@ -35,3 +35,5 @@ alias code='/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/co
 alias dev='npm run dev'
 alias start='npm run start'
 alias build='npm run build'
+
+alias push='git add --all && git commit -a -m upd && git push'

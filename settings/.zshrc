@@ -44,7 +44,7 @@ rp-file-toggle()
 
 rp-key()
 {
-	cat $HOME/.ssh/id_rsa.pub | pbcopy
+	cat $HOME/.ssh/id_rsa.pub && cat $HOME/.ssh/id_rsa.pub | pbcopy
 	echo 'ssh public key copied.'
 }
 

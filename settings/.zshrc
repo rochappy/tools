@@ -6,7 +6,7 @@ ZSH=$HOME/.oh-my-zsh
 
 ZSH_THEME="roc"
 
-plugins=(git zsh-syntax-highlighting sublime node nvm web-search yum zsh_reload vundle urltools systemadmin osx go docker docker-alias python npm react-native)
+plugins=(git zsh-syntax-highlighting sublime node nvm web-search yum zsh_reload vundle urltools systemadmin osx go docker docker-alias python npm react-native yarn)
 
 if [[ -s $ZSH/oh-my-zsh.sh ]]; then
 	source $ZSH/oh-my-zsh.sh
@@ -76,7 +76,7 @@ rp-proxy-close () {
 [[ -s "$HOME/.alias" ]] && source $HOME/.alias
 [[ -s "$HOME/.private.alias" ]] && source $HOME/.private.alias
 
-export SVN_EDITOR=vim
+export EDITOR=vim
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH="$PATH:$HOME/.linuxbrew/bin:/usr/local/bin:/usr/bin:/bin"
 

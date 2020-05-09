@@ -26,6 +26,7 @@
     ca = commit -a -m
     br = branch -a
     co = checkout
+    cb = checkout -B
     df = diff -U6
     ds = diff --staged
     l = log --graph --all --decorate

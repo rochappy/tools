@@ -54,10 +54,10 @@ git clone https://github.com/creationix/nvm.git $user_dir/.nvm
 source $user_dir/.nvm/nvm.sh
 
 #nvm install node
-nvm install node
-nvm alias default node
+nvm install v14
+nvm alias default v14
 
-npm install -g lodash pm2 colors
+npm install -g  pm2
 
 # Download settings
 rm $user_dir/.zshrc

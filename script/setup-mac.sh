@@ -17,7 +17,7 @@ user_dir=/Users/$user
 # Install Homebrew
 rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-brew install wget #jq icdiff htop ag tldr figlet mycli lsd
+brew install wget btop #jq icdiff ag tldr figlet mycli lsd
 
 
 #update Over the wall
@@ -50,10 +50,10 @@ git clone https://github.com/creationix/nvm.git ~/.nvm
 source ~/.nvm/nvm.sh
 
 #nvm install
-nvm install node
-nvm alias default node
+nvm install v20
+nvm alias default v20
 
-npm install -g lodash express pm2 webpack mongoose colors
+npm install -g yarn pnpm
 
 # Download settings
 rm ~/.zshrc
@@ -68,9 +68,6 @@ mkdir -p ~/git
 git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git ~/git/iTerm2-Color-Schemes
 
 # download App
-#wget https://iterm2.com/downloads/stable/iTerm2_v2_0.zip
-#wget https://cachefly.alfredapp.com/Alfred_2.4_279.zip
-#wget http://bettertouchtool.net/BetterTouchTool.zip
 
 # change owner
 chown -Rf $user:$user $user_dir

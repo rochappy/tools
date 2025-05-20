@@ -31,6 +31,7 @@ alias rp-clean-ds="find . -name '.DS_Store' -exec rm {} \;"
 alias st='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 alias mweb='/Applications/MWeb.app/Contents/MacOS/MWeb'
 alias code='/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
+alias cur='/Applications/Cursor.app/Contents/Resources/app/bin/code'
 
 # dev
 alias dev='npm run dev'

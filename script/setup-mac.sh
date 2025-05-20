@@ -29,6 +29,9 @@ brew install wget btop #jq icdiff ag tldr figlet mycli lsd
 #brew install git
 curl -L https://raw.githubusercontent.com/rochappy/tools/master/settings/.gitconfig > ~/.gitconfig
 
+# Install git config
+mkdir ~/.ssh/config
+curl -L https://raw.github.com/rochappy/tools/master/settings/config > ~/.ssh/config
 
 # Install zsh and plugins
 rm -rf ~/.oh-my-zsh highlighting

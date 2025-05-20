@@ -35,3 +35,8 @@
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
+
+[http]
+    proxy = socks5://127.0.0.1:1081
+[https]
+    proxy = socks5://127.0.0.1:1081

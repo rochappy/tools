@@ -1,12 +1,11 @@
 # System
 alias host='sudo vi /etc/hosts'
-alias sthost='sudo st /etc/hosts'
 alias o='open .'
 alias md='mkdir'
 alias rmf='rm -rf'
 alias vi='vim'
 alias vima='vi ~/.alias'
-alias stvima='st ~/.alias'
+alias zrc='vi ~/.zshrc'
 alias grep='grep --color=auto'
 
 # Common bash commands.
@@ -28,14 +27,13 @@ alias rp-du='du -khs'
 alias rp-clean-ds="find . -name '.DS_Store' -exec rm {} \;"
 
 # APP open
-alias st='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl'
 alias mweb='/Applications/MWeb.app/Contents/MacOS/MWeb'
-alias code='/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code'
 alias cur='/Applications/Cursor.app/Contents/Resources/app/bin/code'
 
 # dev
 alias dev='npm run dev'
 alias start='npm run start'
 alias build='npm run build'
+alias prod='npm run prod'
 
 alias push='git add --all && git commit -a -m upd && git push'

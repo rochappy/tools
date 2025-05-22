@@ -62,12 +62,12 @@ print(host)
 }
 
 rp-proxy-open () {
-  export HTTP_PROXY="http://127.0.0.1:1081"
+  export ALL_PROXY="http://127.0.0.1:1082"
   echo "http Proxy already open"
 }
 
 rp-proxy-close () {
-  unset HTTP_PROXY
+  unset ALL_PROXY
   echo "http Proxy closed"
 }
 
@@ -78,7 +78,6 @@ rp-proxy-close () {
 
 export EDITOR=vim
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PATH="$PATH:$HOME/.linuxbrew/bin:/usr/local/bin:/usr/bin:/bin"
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8

@@ -56,7 +56,7 @@ source ~/.nvm/nvm.sh
 nvm install v20
 nvm alias default v20
 
-npm install -g yarn pnpm
+npm install -g yarn pnpm nrm
 
 # Download settings
 rm ~/.zshrc
